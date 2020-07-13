@@ -1645,7 +1645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.sqrt",
     "category": "method",
-    "text": "sqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\n"
+    "text": "sqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nsqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\n"
 },
 
 {
@@ -1653,7 +1653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.exp",
     "category": "method",
-    "text": "exp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\nexp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\n"
+    "text": "exp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\nexp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\n"
 },
 
 {
@@ -3901,7 +3901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Complex balls",
     "title": "Linear dependence",
     "category": "section",
-    "text": "lindep(::Array{acb, 1}, n::Int)lindep(A::Array{acb, 2}, bits::Int)ExamplesCC = ComplexField(128)\n\n# These are two of the roots of x^5 + 3x + 1\na = CC(1.0050669478588622428791051888364775253, - 0.93725915669289182697903585868761513585)\nb = CC(-0.33198902958450931620250069492231652319)\n\n# We recover the polynomial from one root....\nV1 = [CC(1), a, a^2, a^3, a^4, a^5];\nW = lindep(V1, 20)\n\n# ...or from two\nV2 = [CC(1), b, b^2, b^3, b^4, b^5];\nVs = [V1 V2]\'\nX = lindep(Vs, 20)"
+    "text": "lindep(::Array{acb, 1}, n::Int)lindep(A::Array{acb, 2}, bits::Int)ExamplesCC = ComplexField(128)\n\n# These are two of the roots of x^5 + 3x + 1\na = CC(1.0050669478588622428791051888364775253, - 0.93725915669289182697903585868761513585)\nb = CC(-0.33198902958450931620250069492231652319)\n\n# We recover the polynomial from one root....\nV1 = [CC(1), a, a^2, a^3, a^4, a^5];\nW = lindep(V1, 20)\n\n# ...or from two\nV2 = [CC(1), b, b^2, b^3, b^4, b^5];\nVs = [V1 V2]\nX = lindep(Vs, 20)"
 },
 
 {
