@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting Started",
     "title": "Building dependencies from source",
     "category": "section",
-    "text": "Nemo depends on various C libraries which are installed using binaries by default. Building from source can be enabled by setting the environment variable NEMO_SOURCE_BUILD=1 and then doing Pkg.build(\"Nemo\") or Pkg.add(\"Nemo\") depending on whether Nemo was already installed."
+    "text": "Nemo depends on various C libraries which are installed using binaries by default. With julia version >= 1.3, the use of these binaries can be overridden by putting the following into the file ~/.julia/artifacts/Overrides.toml:[e134572f-a0d5-539d-bddf-3cad8db41a82]\nFLINT = \"/prefix/for/libflint\"\n\n[d9960996-1013-53c9-9ba4-74a4155039c3]\nArb = \"/prefix/for/libarb\"\n\n[e21ec000-9f72-519e-ba6d-10061e575a27]\nAntic = \"/prefix/for/libantic\"(If only a specific library should be overridden, only the specific entry should be added.)"
 },
 
 {
@@ -1645,7 +1645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.sqrt",
     "category": "method",
-    "text": "sqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\n"
+    "text": "sqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nsqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\n"
 },
 
 {
@@ -1653,7 +1653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.exp",
     "category": "method",
-    "text": "exp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\nexp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\n"
+    "text": "exp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\nexp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\n"
 },
 
 {
