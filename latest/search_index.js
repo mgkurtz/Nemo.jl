@@ -2033,11 +2033,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "fraction.html#Nemo.simplest_between-Tuple{fmpq,fmpq}",
+    "page": "Fraction fields",
+    "title": "Nemo.simplest_between",
+    "category": "method",
+    "text": "  simplest_between(l::fmpq, r::fmpq)\n\nReturn the simplest fraction in the closed interval [l, r]. A canonical > fraction a_1/b_1 is defined to be simpler than a_2/b_2 iff b_1 < b_2 or b_1 = b_2 and a_1 < a_2.\n\n\n\n"
+},
+
+{
     "location": "fraction.html#Special-functions-1",
     "page": "Fraction fields",
     "title": "Special functions",
     "category": "section",
-    "text": "The following special functions are available for specific rings in Nemo.harmonic(::Int)bernoulli(::Int)bernoulli_cache(::Int)dedekind_sum(::fmpz, ::fmpz)\ndedekind_sum(::fmpz, ::Integer)\ndedekind_sum(::Integer, ::fmpz)\ndedekind_sum(::Integer, ::Integer)Examplesa = harmonic(12)\n\nb = dedekind_sum(12, 13)\nc = dedekind_sum(-120, fmpz(1305))\n\nd = bernoulli(12)\n\nbernoulli_cache(100)\ne = bernoulli(100)"
+    "text": "The following special functions are available for specific rings in Nemo.harmonic(::Int)bernoulli(::Int)bernoulli_cache(::Int)dedekind_sum(::fmpz, ::fmpz)\ndedekind_sum(::fmpz, ::Integer)\ndedekind_sum(::Integer, ::fmpz)\ndedekind_sum(::Integer, ::Integer)Examplesa = harmonic(12)\n\nb = dedekind_sum(12, 13)\nc = dedekind_sum(-120, fmpz(1305))\n\nd = bernoulli(12)\n\nbernoulli_cache(100)\ne = bernoulli(100)simplest_between(::fmpq, ::fmpq)Examplessimplest_between(fmpq(1//10), fmpq(3//10))"
 },
 
 {
@@ -3033,11 +3041,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "arb.html#Nemo.simplest_rational_inside-Tuple{arb}",
+    "page": "Real balls",
+    "title": "Nemo.simplest_rational_inside",
+    "category": "method",
+    "text": "  simplest_between(x::arb)\n\nReturn the simplest fraction inside the ball x. A canonical fraction a_1/b_1 is defined to be simpler than a_2/b_2 iff b_1 < b_2 or > b_1 = b_2 and a_1 < a_2.\n\n\n\n"
+},
+
+{
     "location": "arb.html#Linear-dependence-1",
     "page": "Real balls",
     "title": "Linear dependence",
     "category": "section",
-    "text": "lindep(::Array{arb, 1}, n::Int)ExamplesRR = RealField(128)\n\na = RR(-0.33198902958450931620250069492231652319)\n\nV = [RR(1), a, a^2, a^3, a^4, a^5]\nW = lindep(V, 20)"
+    "text": "lindep(::Array{arb, 1}, n::Int)ExamplesRR = RealField(128)\n\na = RR(-0.33198902958450931620250069492231652319)\n\nV = [RR(1), a, a^2, a^3, a^4, a^5]\nW = lindep(V, 20)simplest_rational_inside(::arb)ExamplesRR = RealField(64)\nsimplest_rational_inside(const_pi(R))"
 },
 
 {
