@@ -11,11 +11,6 @@ julia:
   - 1.5
   - nightly
   
-branches:
-  only:
-    - master
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/  # release tags
-
 notifications:
   - email: false
 # Use the default script
