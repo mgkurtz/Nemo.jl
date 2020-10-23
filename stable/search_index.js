@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Getting Started",
     "title": "Building dependencies from source",
     "category": "section",
-    "text": "Nemo depends on various C libraries which are installed using binaries by default. Building from source can be enabled by setting the environment variable NEMO_SOURCE_BUILD=1 and then doing Pkg.build(\"Nemo\") or Pkg.add(\"Nemo\") depending on whether Nemo was already installed."
+    "text": "Nemo depends on various C libraries which are installed using binaries by default. With julia version >= 1.3, the use of these binaries can be overridden by putting the following into the file ~/.julia/artifacts/Overrides.toml:[e134572f-a0d5-539d-bddf-3cad8db41a82]\nFLINT = \"/prefix/for/libflint\"\n\n[d9960996-1013-53c9-9ba4-74a4155039c3]\nArb = \"/prefix/for/libarb\"\n\n[e21ec000-9f72-519e-ba6d-10061e575a27]\nAntic = \"/prefix/for/libantic\"(If only a specific library should be overridden, only the specific entry should be added.)"
 },
 
 {
@@ -237,7 +237,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Integers",
     "title": "Euclidean division",
     "category": "section",
-    "text": "Nemo also provides a large number of Euclidean division operations. Recall that for a dividend a and divisor b, we can write a = bq + r with 0 leq r  b. We call q the quotient and r the remainder.We distinguish three cases. If q is rounded towards zero, r will have the same sign as a. If q is rounded towards plus infinity, r will have the opposite sign to b. Finally, if q is rounded towards minus infinity, r will have the same sign as b.In the following table we list the division functions and their rounding behaviour. We also give the return value of the function, with q representing return of the quotient and r representing return of the remainder.Function Return Rounding\nmod r towards minus infinity\nrem r towards zero\ndiv q towards minus infinity\ndivrem(a::fmpz, b::fmpz) q, r towards minus infinity\ntdivrem(a::fmpz, b::fmpz) q, r towards zero\nfdivrem(a::fmpz, b::fmpz) q, r towards minus infinityNemo also offers the following ad hoc division operators. The notation and description is as for the other Euclidean division functions.Function Return Rounding\nmod(a::fmpz, b::Int) r towards minus infinity\nrem(a::fmpz, b::Int) r towards zero\ndiv(a::fmpz, b::Int) q towards zero\ntdiv(a::fmpz, b::Int) q towards zero\nfdiv(a::fmpz, b::Int) q towards minus infinity\ncdiv(a::fmpz, b::Int) q towards plus infinityThe following functions are also available, for the case where one is dividing by a power of 2. In other words, for Euclidean division of the form a = b2^d + r. These are useful for bit twiddling.Function Return Rounding\ntdivpow2(a::fmpz, d::Int) q towards zero\nfdivpow2(a::fmpz, d::Int) q towards minus infinity\nfmodpow2(a::fmpz, d::Int) r towards minus infinity\ncdivpow2(a::fmpz, d::Int) q towards plus infinityExamplesa = fmpz(12)\nb = fmpz(5)\n\nq, r = divrem(a, b)\nc = cdiv(a, b)\nd = fdiv(a, b)\nf = tdivpow2(a, 2)\ng = fmodpow2(a, 3)"
+    "text": "Nemo also provides a large number of Euclidean division operations. Recall that for a dividend a and divisor b, we can write a = bq + r with 0 leq r  b. We call q the quotient and r the remainder.We distinguish three cases. If q is rounded towards zero, r will have the same sign as a. If q is rounded towards plus infinity, r will have the opposite sign to b. Finally, if q is rounded towards minus infinity, r will have the same sign as b.In the following table we list the division functions and their rounding behaviour. We also give the return value of the function, with q representing return of the quotient and r representing return of the remainder.Function Return Rounding\nmod r towards minus infinity\nrem r towards zero\ndiv q towards minus infinity\ndivrem(a::fmpz, b::fmpz) q, r towards minus infinity\ntdivrem(a::fmpz, b::fmpz) q, r towards zero\nfdivrem(a::fmpz, b::fmpz) q, r towards minus infinityN.B: the internal definition of Nemo.div and Nemo.divrem are the same as fdiv and fdivrem. The definitions in the table are of Base.div and Base.divrem which agree with Julia\'s definitions of div and divrem.Nemo also offers the following ad hoc division operators. The notation and description is as for the other Euclidean division functions.Function Return Rounding\nmod(a::fmpz, b::Int) r towards minus infinity\nrem(a::fmpz, b::Int) r towards zero\ndiv(a::fmpz, b::Int) q towards zero\ntdiv(a::fmpz, b::Int) q towards zero\nfdiv(a::fmpz, b::Int) q towards minus infinity\ncdiv(a::fmpz, b::Int) q towards plus infinityN.B: the internal definition of Nemo.div is the same as fdiv. The definition in the table is Base.div which agrees with Julia\'s definition of div.The following functions are also available, for the case where one is dividing by a power of 2. In other words, for Euclidean division of the form a = b2^d + r. These are useful for bit twiddling.Function Return Rounding\ntdivpow2(a::fmpz, d::Int) q towards zero\nfdivpow2(a::fmpz, d::Int) q towards minus infinity\nfmodpow2(a::fmpz, d::Int) r towards minus infinity\ncdivpow2(a::fmpz, d::Int) q towards plus infinityExamplesa = fmpz(12)\nb = fmpz(5)\n\nq, r = divrem(a, b)\nc = cdiv(a, b)\nd = fdiv(a, b)\nf = tdivpow2(a, 2)\ng = fmodpow2(a, 3)"
 },
 
 {
@@ -1645,7 +1645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.sqrt",
     "category": "method",
-    "text": "sqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\n"
+    "text": "sqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\nBase.sqrt(f::AbstractAlgebra.PolyElem{T}, check::Bool=true) where T <: RingElement\n\nReturn the square root of f if it is a perfect square, otherwise an exception is raised. If check is set to false the function assumes the input is square and may not fully check this.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nBase.sqrt(a::AbstractAlgebra.FracElem{T}) where T <: RingElem\n\nReturn the square root of a if it is a square, otherwise raise an exception.\n\n\n\n"
 },
 
 {
@@ -2033,11 +2033,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "fraction.html#Nemo.simplest_between-Tuple{fmpq,fmpq}",
+    "page": "Fraction fields",
+    "title": "Nemo.simplest_between",
+    "category": "method",
+    "text": "  simplest_between(l::fmpq, r::fmpq)\n\nReturn the simplest fraction in the closed interval [l, r]. A canonical fraction a_1/b_1 is defined to be simpler than a_2/b_2 iff b_1 < b_2 or b_1 = b_2 and a_1 < a_2.\n\n\n\n"
+},
+
+{
     "location": "fraction.html#Special-functions-1",
     "page": "Fraction fields",
     "title": "Special functions",
     "category": "section",
-    "text": "The following special functions are available for specific rings in Nemo.harmonic(::Int)bernoulli(::Int)bernoulli_cache(::Int)dedekind_sum(::fmpz, ::fmpz)\ndedekind_sum(::fmpz, ::Integer)\ndedekind_sum(::Integer, ::fmpz)\ndedekind_sum(::Integer, ::Integer)Examplesa = harmonic(12)\n\nb = dedekind_sum(12, 13)\nc = dedekind_sum(-120, fmpz(1305))\n\nd = bernoulli(12)\n\nbernoulli_cache(100)\ne = bernoulli(100)"
+    "text": "The following special functions are available for specific rings in Nemo.harmonic(::Int)bernoulli(::Int)bernoulli_cache(::Int)dedekind_sum(::fmpz, ::fmpz)\ndedekind_sum(::fmpz, ::Integer)\ndedekind_sum(::Integer, ::fmpz)\ndedekind_sum(::Integer, ::Integer)Examplesa = harmonic(12)\n\nb = dedekind_sum(12, 13)\nc = dedekind_sum(-120, fmpz(1305))\n\nd = bernoulli(12)\n\nbernoulli_cache(100)\ne = bernoulli(100)simplest_between(::fmpq, ::fmpq)Examplessimplest_between(fmpq(1//10), fmpq(3//10))"
 },
 
 {
@@ -3033,11 +3041,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "arb.html#Nemo.simplest_rational_inside-Tuple{arb}",
+    "page": "Real balls",
+    "title": "Nemo.simplest_rational_inside",
+    "category": "method",
+    "text": "  simplest_rational_inside(x::arb)\n\nReturn the simplest fraction inside the ball x. A canonical fraction a_1/b_1 is defined to be simpler than a_2/b_2 iff b_1 < b_2 or b_1 = b_2 and a_1 < a_2.\n\n\n\n"
+},
+
+{
     "location": "arb.html#Linear-dependence-1",
     "page": "Real balls",
     "title": "Linear dependence",
     "category": "section",
-    "text": "lindep(::Array{arb, 1}, n::Int)ExamplesRR = RealField(128)\n\na = RR(-0.33198902958450931620250069492231652319)\n\nV = [RR(1), a, a^2, a^3, a^4, a^5]\nW = lindep(V, 20)"
+    "text": "lindep(::Array{arb, 1}, n::Int)ExamplesRR = RealField(128)\n\na = RR(-0.33198902958450931620250069492231652319)\n\nV = [RR(1), a, a^2, a^3, a^4, a^5]\nW = lindep(V, 20)simplest_rational_inside(::arb)ExamplesRR = RealField(64)\nsimplest_rational_inside(const_pi(RR))"
 },
 
 {
@@ -4685,7 +4701,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "Matrix functionality",
     "category": "section",
-    "text": "All matrix spaces in Nemo follow the AbstractAlgebra.jl matrix interface:https://nemocas.github.io/AbstractAlgebra.jl/latest/matrix_spaces.In addition, AbstractAlgebra.jl provides a great deal of generic functionality for matrices. Some of this functionality is also provided by C libraries, such as Flint, for various specific rings.https://nemocas.github.io/AbstractAlgebra.jl/latest/matrixIn the following, we list the functionality which is provided in addition to the generic matrix functionality, for specific rings in Nemo."
+    "text": "All matrix spaces in Nemo follow the AbstractAlgebra.jl matrix interface:https://nemocas.github.io/AbstractAlgebra.jl/latest/matrix_spacesIn addition, AbstractAlgebra.jl provides a great deal of generic functionality for matrices. Some of this functionality is also provided by C libraries, such as Flint, for various specific rings.https://nemocas.github.io/AbstractAlgebra.jl/latest/matrixIn the following, we list the functionality which is provided in addition to the generic matrix functionality, for specific rings in Nemo."
 },
 
 {
