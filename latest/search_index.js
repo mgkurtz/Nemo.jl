@@ -933,7 +933,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Univariate polynomials",
     "title": "Nemo.roots",
     "category": "method",
-    "text": "roots(x::acb_poly; target=0, isolate_real=false, initial_prec=0, max_prec=0, max_iter=0)\n\nAttempts to isolate the complex roots of the complex polynomial x by iteratively refining balls in which they lie.This is done by increasing the working precision, starting at initial_prec. The maximal number of iterations can be set using max_iter and the maximal precision can be set using max_prec.If isolate_real is set and x is strictly real, then the real roots will be isolated from the non-real roots. Every root will have either zero, positive or negative real part.It is assumed that x is squarefree.\n\n\n\n"
+    "text": "roots(x::acb_poly; target=0, isolate_real=false, initial_prec=0, max_prec=0, max_iter=0)\n\nAttempts to isolate the complex roots of the complex polynomial x by iteratively refining balls in which they lie.\n\nThis is done by increasing the working precision, starting at initial_prec. The maximal number of iterations can be set using max_iter and the maximal precision can be set using max_prec.\n\nIf isolate_real is set and x is strictly real, then the real roots will be isolated from the non-real roots. Every root will have either zero, positive or negative real part.\n\nIt is assumed that x is squarefree.\n\n\n\n"
 },
 
 {
@@ -3645,7 +3645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Complex balls",
     "title": "Nemo.modweber_f2",
     "category": "method",
-    "text": "modweber_f2(x::acb)\n\nReturn the modular Weber function $\\mathfrak{f}_2(\\tau) = \\frac{\\sqrt{2}\\eta(2\\tau)}{\\eta(\\tau)}$ at x in the complex upper half plane.\n\n\n\n"
+    "text": "modweber_f2(x::acb)\n\nReturn the modular Weber function mathfrakf_2(tau) = fracsqrt2eta(2tau)eta(tau) at x in the complex upper half plane.\n\n\n\n"
 },
 
 {
@@ -3765,7 +3765,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Complex balls",
     "title": "Nemo.polylog",
     "category": "method",
-    "text": "polylog(s::acb, a::acb)\n\n\n\n\n\n"
+    "text": "polylog(s::acb, a::acb)\n\n\n\n"
 },
 
 {
@@ -4853,7 +4853,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "Nemo.nullspace_right_rational",
     "category": "method",
-    "text": "nullspace_right_rational(x::fmpz_mat)\n\nReturn a tuple (r U) consisting of a matrix U such that the first r columns form the right rational nullspace of x, i.e. a set of vectors over mathbbZ giving a mathbbQ-basis  for the nullspace of x considered as a matrix over\n\nmathbbQ\n\n.\n\n\n\n"
+    "text": "nullspace_right_rational(x::fmpz_mat)\n\nReturn a tuple (r U) consisting of a matrix U such that the first r columns form the right rational nullspace of x, i.e. a set of vectors over mathbbZ giving a mathbbQ-basis  for the nullspace of x considered as a matrix over mathbbQ.\n\n\n\n"
 },
 
 {
@@ -5261,7 +5261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "LinearAlgebra.eigvals",
     "category": "method",
-    "text": "eigvals(A::acb_mat)\n\nReturns the eigenvalues of A as a vector of tuples (acb, Int). Each tuple (z, k) corresponds to a cluser of k eigenvalues of A.This function is experimental.\n\n\n\n"
+    "text": "eigvals(A::acb_mat)\n\nReturns the eigenvalues of A as a vector of tuples (acb, Int). Each tuple (z, k) corresponds to a cluser of k eigenvalues of A.\n\nThis function is experimental.\n\n\n\n"
 },
 
 {
@@ -5269,7 +5269,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "Nemo.eigvals_simple",
     "category": "method",
-    "text": "eigvals_simple(A::acb_mat, alg = :default)\n\nReturns the eigenvalues of A as a vector of acb. It is assumed that A has only simple eigenvalues.The algorithm used can be changed by setting the alg keyword to :vdhoeven_mourrain or :rump.This function is experimental.\n\n\n\n"
+    "text": "eigvals_simple(A::acb_mat, alg = :default)\n\nReturns the eigenvalues of A as a vector of acb. It is assumed that A has only simple eigenvalues.\n\nThe algorithm used can be changed by setting the alg keyword to :vdhoeven_mourrain or :rump.\n\nThis function is experimental.\n\n\n\n"
 },
 
 {
