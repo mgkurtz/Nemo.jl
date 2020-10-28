@@ -1645,7 +1645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.sqrt",
     "category": "method",
-    "text": "Base.sqrt(f::AbstractAlgebra.PolyElem{T}, check::Bool=true) where T <: RingElement\n\nReturn the square root of f if it is a perfect square, otherwise an exception is raised. If check is set to false the function assumes the input is square and may not fully check this.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nBase.sqrt(a::AbstractAlgebra.FracElem{T}) where T <: RingElem\n\nReturn the square root of a if it is a square, otherwise raise an exception.\n\n\n\nsqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\n"
+    "text": "sqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\nBase.sqrt(f::AbstractAlgebra.PolyElem{T}, check::Bool=true) where T <: RingElement\n\nReturn the square root of f if it is a perfect square, otherwise an exception is raised. If check is set to false the function assumes the input is square and may not fully check this.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nBase.sqrt(a::AbstractAlgebra.FracElem{T}) where T <: RingElem\n\nReturn the square root of a if it is a square, otherwise raise an exception.\n\n\n\n"
 },
 
 {
@@ -1653,7 +1653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.exp",
     "category": "method",
-    "text": "exp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\nexp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\n"
+    "text": "exp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\nexp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\n"
 },
 
 {
@@ -2945,19 +2945,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "arb.html#Nemo.polylog-Tuple{arb,arb}",
+    "location": "arb.html#Nemo.polylog-Tuple{Union{Int64, arb},arb}",
     "page": "Real balls",
     "title": "Nemo.polylog",
     "category": "method",
-    "text": "polylog(s::arb, a::arb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
-},
-
-{
-    "location": "arb.html#Nemo.polylog-Tuple{Int64,arb}",
-    "page": "Real balls",
-    "title": "Nemo.polylog",
-    "category": "method",
-    "text": "polylog(s::Int, a::arb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
+    "text": "polylog(s::Union{arb,Int}, a::arb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
 },
 
 {
@@ -3029,7 +3021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Real balls",
     "title": "Mathematical and special functions",
     "category": "section",
-    "text": "floor(::arb)ceil(::arb)Base.sqrt(::arb)rsqrt(::arb)sqrt1pm1(::arb)sqrtpos(::arb)log(::arb)log1p(::arb)Base.exp(::arb)expm1(::arb)sin(::arb)cos(::arb)sinpi(::arb)cospi(::arb)tan(::arb)cot(::arb)tanpi(::arb)cotpi(::arb)sinh(::arb)cosh(::arb)tanh(::arb)coth(::arb)atan(::arb)asin(::arb)acos(::arb)atanh(::arb)asinh(::arb)acosh(::arb)gamma(::arb)lgamma(::arb)rgamma(::arb)digamma(::arb)zeta(::arb)sincos(::arb)sincospi(::arb)sinpi(::fmpq, ::ArbField)cospi(::fmpq, ::ArbField)sincospi(::fmpq, ::ArbField)sinhcosh(::arb)atan2(::arb, ::arb)agm(::arb, ::arb)zeta(::arb, ::arb)hypot(::arb, ::arb)root(::arb, ::Int)fac(::arb)fac(::Int, ::ArbField)binom(::arb, ::UInt)binom(::UInt, ::UInt, ::ArbField)fib(::fmpz, ::ArbField)fib(::Int, ::ArbField)gamma(::fmpz, ::ArbField)gamma(::fmpq, ::ArbField)zeta(::Int, ::ArbField)bernoulli(::Int, ::ArbField)risingfac(::arb, ::Int)risingfac(::fmpq, ::Int, ::ArbField)risingfac2(::arb, ::Int)polylog(::arb, ::arb)polylog(::Int, ::arb)chebyshev_t(::Int, ::arb)chebyshev_u(::Int, ::arb)chebyshev_t2(::Int, ::arb)chebyshev_u2(::Int, ::arb)bell(::fmpz, ::ArbField)bell(::Int, ::ArbField)numpart(::fmpz, ::ArbField)numpart(::Int, ::ArbField)ExamplesRR = RealField(64)\n\na = floor(exp(RR(1)))\nb = sinpi(QQ(5,6), RR)\nc = gamma(QQ(1,3), RealField(256))\nd = bernoulli(1000, RealField(53))\nf = polylog(3, RR(-10))"
+    "text": "floor(::arb)ceil(::arb)Base.sqrt(::arb)rsqrt(::arb)sqrt1pm1(::arb)sqrtpos(::arb)log(::arb)log1p(::arb)Base.exp(::arb)expm1(::arb)sin(::arb)cos(::arb)sinpi(::arb)cospi(::arb)tan(::arb)cot(::arb)tanpi(::arb)cotpi(::arb)sinh(::arb)cosh(::arb)tanh(::arb)coth(::arb)atan(::arb)asin(::arb)acos(::arb)atanh(::arb)asinh(::arb)acosh(::arb)gamma(::arb)lgamma(::arb)rgamma(::arb)digamma(::arb)zeta(::arb)sincos(::arb)sincospi(::arb)sinpi(::fmpq, ::ArbField)cospi(::fmpq, ::ArbField)sincospi(::fmpq, ::ArbField)sinhcosh(::arb)atan2(::arb, ::arb)agm(::arb, ::arb)zeta(::arb, ::arb)hypot(::arb, ::arb)root(::arb, ::Int)fac(::arb)fac(::Int, ::ArbField)binom(::arb, ::UInt)binom(::UInt, ::UInt, ::ArbField)fib(::fmpz, ::ArbField)fib(::Int, ::ArbField)gamma(::fmpz, ::ArbField)gamma(::fmpq, ::ArbField)zeta(::Int, ::ArbField)bernoulli(::Int, ::ArbField)risingfac(::arb, ::Int)risingfac(::fmpq, ::Int, ::ArbField)risingfac2(::arb, ::Int)polylog(::Union{arb,Int}, ::arb)chebyshev_t(::Int, ::arb)chebyshev_u(::Int, ::arb)chebyshev_t2(::Int, ::arb)chebyshev_u2(::Int, ::arb)bell(::fmpz, ::ArbField)bell(::Int, ::ArbField)numpart(::fmpz, ::ArbField)numpart(::Int, ::ArbField)ExamplesRR = RealField(64)\n\na = floor(exp(RR(1)))\nb = sinpi(QQ(5,6), RR)\nc = gamma(QQ(1,3), RealField(256))\nd = bernoulli(1000, RealField(53))\nf = polylog(3, RR(-10))"
 },
 
 {
@@ -3761,19 +3753,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "acb.html#Nemo.polylog-Tuple{acb,acb}",
+    "location": "acb.html#Nemo.polylog-Tuple{Union{Int64, acb},acb}",
     "page": "Complex balls",
     "title": "Nemo.polylog",
     "category": "method",
-    "text": "polylog(s::acb, a::acb)\n\n\n\n"
-},
-
-{
-    "location": "acb.html#Nemo.polylog-Tuple{Int64,acb}",
-    "page": "Complex balls",
-    "title": "Nemo.polylog",
-    "category": "method",
-    "text": "polylog(s::Int, a::acb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
+    "text": "polylog(s::Union{acb,Int}, a::acb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
 },
 
 {
@@ -3893,7 +3877,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Complex balls",
     "title": "Mathematical and special functions",
     "category": "section",
-    "text": "Base.sqrt(::acb)rsqrt(::acb)log(::acb)log1p(::acb)Base.exp(::acb)exppii(::acb)sin(::acb)cos(::acb)sinpi(::acb)cospi(::acb)tan(::acb)cot(::acb)tanpi(::acb)cotpi(::acb)sinh(::acb)cosh(::acb)tanh(::acb)coth(::acb)atan(::acb)logsinpi(::acb)gamma(::acb)lgamma(::acb)rgamma(::acb)digamma(::acb)zeta(::acb)barnesg(::acb)logbarnesg(::acb)erf(::acb)erfi(::acb)ei(::acb)si(::acb)ci(::acb)shi(::acb)chi(::acb)modeta(::acb)modweber_f(::acb)modweber_f1(::acb)modweber_f2(::acb)modj(::acb)modlambda(::acb)moddelta(::acb)ellipk(::acb)ellipe(::acb)sincos(::acb)sincospi(::acb)sinhcosh(::acb)agm(::acb)\nagm(::acb, ::acb)polygamma(::acb, ::acb)zeta(::acb, ::acb)risingfac(::acb, ::Int)risingfac2(::acb, ::Int)polylog(::acb, ::acb)polylog(::Int, ::acb)li(::acb)lioffset(::acb)expint(::acb, ::acb)gamma(::acb, ::acb)besselj(::acb, ::acb)bessely(::acb, ::acb)besseli(::acb, ::acb)besselk(::acb, ::acb)hyp1f1(::acb, ::acb, ::acb)hyp1f1r(::acb, ::acb, ::acb)hyperu(::acb, ::acb, ::acb)hyp2f1(::acb, ::acb, ::acb, ::acb)jtheta(::acb, ::acb)ellipwp(::acb, ::acb)ExamplesCC = ComplexField(64)\n\ns = CC(1, 2)\nz = CC(\"1.23\", \"3.45\")\n\na = sin(z)^2 + cos(z)^2\nb = zeta(z)\nc = besselj(s, z)\nd = hyp1f1(s, s+1, z)"
+    "text": "Base.sqrt(::acb)rsqrt(::acb)log(::acb)log1p(::acb)Base.exp(::acb)exppii(::acb)sin(::acb)cos(::acb)sinpi(::acb)cospi(::acb)tan(::acb)cot(::acb)tanpi(::acb)cotpi(::acb)sinh(::acb)cosh(::acb)tanh(::acb)coth(::acb)atan(::acb)logsinpi(::acb)gamma(::acb)lgamma(::acb)rgamma(::acb)digamma(::acb)zeta(::acb)barnesg(::acb)logbarnesg(::acb)erf(::acb)erfi(::acb)ei(::acb)si(::acb)ci(::acb)shi(::acb)chi(::acb)modeta(::acb)modweber_f(::acb)modweber_f1(::acb)modweber_f2(::acb)modj(::acb)modlambda(::acb)moddelta(::acb)ellipk(::acb)ellipe(::acb)sincos(::acb)sincospi(::acb)sinhcosh(::acb)agm(::acb)\nagm(::acb, ::acb)polygamma(::acb, ::acb)zeta(::acb, ::acb)risingfac(::acb, ::Int)risingfac2(::acb, ::Int)polylog(::Union{acb,Int}, ::acb)li(::acb)lioffset(::acb)expint(::acb, ::acb)gamma(::acb, ::acb)besselj(::acb, ::acb)bessely(::acb, ::acb)besseli(::acb, ::acb)besselk(::acb, ::acb)hyp1f1(::acb, ::acb, ::acb)hyp1f1r(::acb, ::acb, ::acb)hyperu(::acb, ::acb, ::acb)hyp2f1(::acb, ::acb, ::acb, ::acb)jtheta(::acb, ::acb)ellipwp(::acb, ::acb)ExamplesCC = ComplexField(64)\n\ns = CC(1, 2)\nz = CC(\"1.23\", \"3.45\")\n\na = sin(z)^2 + cos(z)^2\nb = zeta(z)\nc = besselj(s, z)\nd = hyp1f1(s, s+1, z)"
 },
 
 {
