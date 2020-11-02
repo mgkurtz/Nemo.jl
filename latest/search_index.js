@@ -1645,7 +1645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.sqrt",
     "category": "method",
-    "text": "Base.sqrt(f::AbstractAlgebra.PolyElem{T}, check::Bool=true) where T <: RingElement\n\nReturn the square root of f if it is a perfect square, otherwise an exception is raised. If check is set to false the function assumes the input is square and may not fully check this.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nBase.sqrt(a::AbstractAlgebra.FracElem{T}) where T <: RingElem\n\nReturn the square root of a if it is a square, otherwise raise an exception.\n\n\n\nsqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\n"
+    "text": "sqrt(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the square root of the given Puiseux series.\n\n\n\nBase.sqrt(f::AbstractAlgebra.PolyElem{T}, check::Bool=true) where T <: RingElement\n\nReturn the square root of f if it is a perfect square, otherwise an exception is raised. If check is set to false the function assumes the input is square and may not fully check this.\n\n\n\nsqrt(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the square root of the given Puiseux series a.\n\n\n\nBase.sqrt(a::AbstractAlgebra.FracElem{T}) where T <: RingElem\n\nReturn the square root of a if it is a square, otherwise raise an exception.\n\n\n\n"
 },
 
 {
@@ -1653,7 +1653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Puiseux series",
     "title": "Base.exp",
     "category": "method",
-    "text": "exp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\nexp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\n"
+    "text": "exp(a::FlintPuiseuxSeriesElem{T}) where T <: RingElem\n\nReturn the exponential of the given Puiseux series.\n\n\n\nexp(a::AbstractAlgebra.RelSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.LaurentSeriesElem)\n\nReturn the exponential of the power series a.\n\n\n\nexp(a::Generic.PuiseuxSeriesElem{T}) where T <: RingElement\n\nReturn the exponential of the given Puiseux series a.\n\n\n\n"
 },
 
 {
