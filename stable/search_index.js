@@ -933,7 +933,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Univariate polynomials",
     "title": "Nemo.roots",
     "category": "method",
-    "text": "roots(x::acb_poly; target=0, isolate_real=false, initial_prec=0, max_prec=0, max_iter=0)\n\nAttempts to isolate the complex roots of the complex polynomial x by iteratively refining balls in which they lie.This is done by increasing the working precision, starting at initial_prec. The maximal number of iterations can be set using max_iter and the maximal precision can be set using max_prec.If isolate_real is set and x is strictly real, then the real roots will be isolated from the non-real roots. Every root will have either zero, positive or negative real part.It is assumed that x is squarefree.\n\n\n\n"
+    "text": "roots(x::acb_poly; target=0, isolate_real=false, initial_prec=0, max_prec=0, max_iter=0)\n\nAttempts to isolate the complex roots of the complex polynomial x by iteratively refining balls in which they lie.\n\nThis is done by increasing the working precision, starting at initial_prec. The maximal number of iterations can be set using max_iter and the maximal precision can be set using max_prec.\n\nIf isolate_real is set and x is strictly real, then the real roots will be isolated from the non-real roots. Every root will have either zero, positive or negative real part.\n\nIt is assumed that x is squarefree.\n\n\n\n"
 },
 
 {
@@ -2945,19 +2945,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "arb.html#Nemo.polylog-Tuple{arb,arb}",
+    "location": "arb.html#Nemo.polylog-Tuple{Union{Int64, arb},arb}",
     "page": "Real balls",
     "title": "Nemo.polylog",
     "category": "method",
-    "text": "polylog(s::arb, a::arb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
-},
-
-{
-    "location": "arb.html#Nemo.polylog-Tuple{Int64,arb}",
-    "page": "Real balls",
-    "title": "Nemo.polylog",
-    "category": "method",
-    "text": "polylog(s::Int, a::arb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
+    "text": "polylog(s::Union{arb,Int}, a::arb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
 },
 
 {
@@ -3029,7 +3021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Real balls",
     "title": "Mathematical and special functions",
     "category": "section",
-    "text": "floor(::arb)ceil(::arb)Base.sqrt(::arb)rsqrt(::arb)sqrt1pm1(::arb)sqrtpos(::arb)log(::arb)log1p(::arb)Base.exp(::arb)expm1(::arb)sin(::arb)cos(::arb)sinpi(::arb)cospi(::arb)tan(::arb)cot(::arb)tanpi(::arb)cotpi(::arb)sinh(::arb)cosh(::arb)tanh(::arb)coth(::arb)atan(::arb)asin(::arb)acos(::arb)atanh(::arb)asinh(::arb)acosh(::arb)gamma(::arb)lgamma(::arb)rgamma(::arb)digamma(::arb)zeta(::arb)sincos(::arb)sincospi(::arb)sinpi(::fmpq, ::ArbField)cospi(::fmpq, ::ArbField)sincospi(::fmpq, ::ArbField)sinhcosh(::arb)atan2(::arb, ::arb)agm(::arb, ::arb)zeta(::arb, ::arb)hypot(::arb, ::arb)root(::arb, ::Int)fac(::arb)fac(::Int, ::ArbField)binom(::arb, ::UInt)binom(::UInt, ::UInt, ::ArbField)fib(::fmpz, ::ArbField)fib(::Int, ::ArbField)gamma(::fmpz, ::ArbField)gamma(::fmpq, ::ArbField)zeta(::Int, ::ArbField)bernoulli(::Int, ::ArbField)risingfac(::arb, ::Int)risingfac(::fmpq, ::Int, ::ArbField)risingfac2(::arb, ::Int)polylog(::arb, ::arb)polylog(::Int, ::arb)chebyshev_t(::Int, ::arb)chebyshev_u(::Int, ::arb)chebyshev_t2(::Int, ::arb)chebyshev_u2(::Int, ::arb)bell(::fmpz, ::ArbField)bell(::Int, ::ArbField)numpart(::fmpz, ::ArbField)numpart(::Int, ::ArbField)ExamplesRR = RealField(64)\n\na = floor(exp(RR(1)))\nb = sinpi(QQ(5,6), RR)\nc = gamma(QQ(1,3), RealField(256))\nd = bernoulli(1000, RealField(53))\nf = polylog(3, RR(-10))"
+    "text": "floor(::arb)ceil(::arb)Base.sqrt(::arb)rsqrt(::arb)sqrt1pm1(::arb)sqrtpos(::arb)log(::arb)log1p(::arb)Base.exp(::arb)expm1(::arb)sin(::arb)cos(::arb)sinpi(::arb)cospi(::arb)tan(::arb)cot(::arb)tanpi(::arb)cotpi(::arb)sinh(::arb)cosh(::arb)tanh(::arb)coth(::arb)atan(::arb)asin(::arb)acos(::arb)atanh(::arb)asinh(::arb)acosh(::arb)gamma(::arb)lgamma(::arb)rgamma(::arb)digamma(::arb)zeta(::arb)sincos(::arb)sincospi(::arb)sinpi(::fmpq, ::ArbField)cospi(::fmpq, ::ArbField)sincospi(::fmpq, ::ArbField)sinhcosh(::arb)atan2(::arb, ::arb)agm(::arb, ::arb)zeta(::arb, ::arb)hypot(::arb, ::arb)root(::arb, ::Int)fac(::arb)fac(::Int, ::ArbField)binom(::arb, ::UInt)binom(::UInt, ::UInt, ::ArbField)fib(::fmpz, ::ArbField)fib(::Int, ::ArbField)gamma(::fmpz, ::ArbField)gamma(::fmpq, ::ArbField)zeta(::Int, ::ArbField)bernoulli(::Int, ::ArbField)risingfac(::arb, ::Int)risingfac(::fmpq, ::Int, ::ArbField)risingfac2(::arb, ::Int)polylog(::Union{arb,Int}, ::arb)chebyshev_t(::Int, ::arb)chebyshev_u(::Int, ::arb)chebyshev_t2(::Int, ::arb)chebyshev_u2(::Int, ::arb)bell(::fmpz, ::ArbField)bell(::Int, ::ArbField)numpart(::fmpz, ::ArbField)numpart(::Int, ::ArbField)ExamplesRR = RealField(64)\n\na = floor(exp(RR(1)))\nb = sinpi(QQ(5,6), RR)\nc = gamma(QQ(1,3), RealField(256))\nd = bernoulli(1000, RealField(53))\nf = polylog(3, RR(-10))"
 },
 
 {
@@ -3645,7 +3637,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Complex balls",
     "title": "Nemo.modweber_f2",
     "category": "method",
-    "text": "modweber_f2(x::acb)\n\nReturn the modular Weber function $\\mathfrak{f}_2(\\tau) = \\frac{\\sqrt{2}\\eta(2\\tau)}{\\eta(\\tau)}$ at x in the complex upper half plane.\n\n\n\n"
+    "text": "modweber_f2(x::acb)\n\nReturn the modular Weber function mathfrakf_2(tau) = fracsqrt2eta(2tau)eta(tau) at x in the complex upper half plane.\n\n\n\n"
 },
 
 {
@@ -3761,19 +3753,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "acb.html#Nemo.polylog-Tuple{acb,acb}",
+    "location": "acb.html#Nemo.polylog-Tuple{Union{Int64, acb},acb}",
     "page": "Complex balls",
     "title": "Nemo.polylog",
     "category": "method",
-    "text": "polylog(s::acb, a::acb)\n\n\n\n\n\n"
-},
-
-{
-    "location": "acb.html#Nemo.polylog-Tuple{Int64,acb}",
-    "page": "Complex balls",
-    "title": "Nemo.polylog",
-    "category": "method",
-    "text": "polylog(s::Int, a::acb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
+    "text": "polylog(s::Union{acb,Int}, a::acb)\n\nReturn the polylogarithm Li_s(a).\n\n\n\n"
 },
 
 {
@@ -3893,7 +3877,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Complex balls",
     "title": "Mathematical and special functions",
     "category": "section",
-    "text": "Base.sqrt(::acb)rsqrt(::acb)log(::acb)log1p(::acb)Base.exp(::acb)exppii(::acb)sin(::acb)cos(::acb)sinpi(::acb)cospi(::acb)tan(::acb)cot(::acb)tanpi(::acb)cotpi(::acb)sinh(::acb)cosh(::acb)tanh(::acb)coth(::acb)atan(::acb)logsinpi(::acb)gamma(::acb)lgamma(::acb)rgamma(::acb)digamma(::acb)zeta(::acb)barnesg(::acb)logbarnesg(::acb)erf(::acb)erfi(::acb)ei(::acb)si(::acb)ci(::acb)shi(::acb)chi(::acb)modeta(::acb)modweber_f(::acb)modweber_f1(::acb)modweber_f2(::acb)modj(::acb)modlambda(::acb)moddelta(::acb)ellipk(::acb)ellipe(::acb)sincos(::acb)sincospi(::acb)sinhcosh(::acb)agm(::acb)\nagm(::acb, ::acb)polygamma(::acb, ::acb)zeta(::acb, ::acb)risingfac(::acb, ::Int)risingfac2(::acb, ::Int)polylog(::acb, ::acb)polylog(::Int, ::acb)li(::acb)lioffset(::acb)expint(::acb, ::acb)gamma(::acb, ::acb)besselj(::acb, ::acb)bessely(::acb, ::acb)besseli(::acb, ::acb)besselk(::acb, ::acb)hyp1f1(::acb, ::acb, ::acb)hyp1f1r(::acb, ::acb, ::acb)hyperu(::acb, ::acb, ::acb)hyp2f1(::acb, ::acb, ::acb, ::acb)jtheta(::acb, ::acb)ellipwp(::acb, ::acb)ExamplesCC = ComplexField(64)\n\ns = CC(1, 2)\nz = CC(\"1.23\", \"3.45\")\n\na = sin(z)^2 + cos(z)^2\nb = zeta(z)\nc = besselj(s, z)\nd = hyp1f1(s, s+1, z)"
+    "text": "Base.sqrt(::acb)rsqrt(::acb)log(::acb)log1p(::acb)Base.exp(::acb)exppii(::acb)sin(::acb)cos(::acb)sinpi(::acb)cospi(::acb)tan(::acb)cot(::acb)tanpi(::acb)cotpi(::acb)sinh(::acb)cosh(::acb)tanh(::acb)coth(::acb)atan(::acb)logsinpi(::acb)gamma(::acb)lgamma(::acb)rgamma(::acb)digamma(::acb)zeta(::acb)barnesg(::acb)logbarnesg(::acb)erf(::acb)erfi(::acb)ei(::acb)si(::acb)ci(::acb)shi(::acb)chi(::acb)modeta(::acb)modweber_f(::acb)modweber_f1(::acb)modweber_f2(::acb)modj(::acb)modlambda(::acb)moddelta(::acb)ellipk(::acb)ellipe(::acb)sincos(::acb)sincospi(::acb)sinhcosh(::acb)agm(::acb)\nagm(::acb, ::acb)polygamma(::acb, ::acb)zeta(::acb, ::acb)risingfac(::acb, ::Int)risingfac2(::acb, ::Int)polylog(::Union{acb,Int}, ::acb)li(::acb)lioffset(::acb)expint(::acb, ::acb)gamma(::acb, ::acb)besselj(::acb, ::acb)bessely(::acb, ::acb)besseli(::acb, ::acb)besselk(::acb, ::acb)hyp1f1(::acb, ::acb, ::acb)hyp1f1r(::acb, ::acb, ::acb)hyperu(::acb, ::acb, ::acb)hyp2f1(::acb, ::acb, ::acb, ::acb)jtheta(::acb, ::acb)ellipwp(::acb, ::acb)ExamplesCC = ComplexField(64)\n\ns = CC(1, 2)\nz = CC(\"1.23\", \"3.45\")\n\na = sin(z)^2 + cos(z)^2\nb = zeta(z)\nc = besselj(s, z)\nd = hyp1f1(s, s+1, z)"
 },
 
 {
@@ -4853,7 +4837,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "Nemo.nullspace_right_rational",
     "category": "method",
-    "text": "nullspace_right_rational(x::fmpz_mat)\n\nReturn a tuple (r U) consisting of a matrix U such that the first r columns form the right rational nullspace of x, i.e. a set of vectors over mathbbZ giving a mathbbQ-basis  for the nullspace of x considered as a matrix over\n\nmathbbQ\n\n.\n\n\n\n"
+    "text": "nullspace_right_rational(x::fmpz_mat)\n\nReturn a tuple (r U) consisting of a matrix U such that the first r columns form the right rational nullspace of x, i.e. a set of vectors over mathbbZ giving a mathbbQ-basis  for the nullspace of x considered as a matrix over mathbbQ.\n\n\n\n"
 },
 
 {
@@ -5081,9 +5065,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "matrix.html#Nemo.issnf-Tuple{fmpz_mat}",
+    "location": "matrix.html#AbstractAlgebra.Generic.issnf-Tuple{fmpz_mat}",
     "page": "Matrices",
-    "title": "Nemo.issnf",
+    "title": "AbstractAlgebra.Generic.issnf",
     "category": "method",
     "text": "issnf(x::fmpz_mat)\n\nReturn true if x is in Smith normal form, otherwise return false.\n\n\n\n"
 },
@@ -5261,7 +5245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "LinearAlgebra.eigvals",
     "category": "method",
-    "text": "eigvals(A::acb_mat)\n\nReturns the eigenvalues of A as a vector of tuples (acb, Int). Each tuple (z, k) corresponds to a cluser of k eigenvalues of A.This function is experimental.\n\n\n\n"
+    "text": "eigvals(A::acb_mat)\n\nReturns the eigenvalues of A as a vector of tuples (acb, Int). Each tuple (z, k) corresponds to a cluser of k eigenvalues of A.\n\nThis function is experimental.\n\n\n\n"
 },
 
 {
@@ -5269,7 +5253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Matrices",
     "title": "Nemo.eigvals_simple",
     "category": "method",
-    "text": "eigvals_simple(A::acb_mat, alg = :default)\n\nReturns the eigenvalues of A as a vector of acb. It is assumed that A has only simple eigenvalues.The algorithm used can be changed by setting the alg keyword to :vdhoeven_mourrain or :rump.This function is experimental.\n\n\n\n"
+    "text": "eigvals_simple(A::acb_mat, alg = :default)\n\nReturns the eigenvalues of A as a vector of acb. It is assumed that A has only simple eigenvalues.\n\nThe algorithm used can be changed by setting the alg keyword to :vdhoeven_mourrain or :rump.\n\nThis function is experimental.\n\n\n\n"
 },
 
 {
