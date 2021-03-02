@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-const AnticNumberFieldID = Dict{Tuple{FmpqPolyRing, fmpq_poly, Symbol}, Field}()
+const AnticNumberFieldID = CacheDictType{Tuple{FmpqPolyRing, fmpq_poly, Symbol}, Field}()
 
 mutable struct AnticNumberField <: SimpleNumField{fmpq}
    pol_coeffs::Ptr{Nothing}
@@ -33,7 +33,7 @@ mutable struct AnticNumberField <: SimpleNumField{fmpq}
 
    function AnticNumberField(pol::fmpq_poly, s::Symbol, cached::Bool = false, check::Bool = true)
      check && !isirreducible(pol) && error("Polynomial must be irreducible")
-      if !cached
+     return get_cached!(AnticNumberFieldID, (parent(pol), pol, s), cached) do
          nf = new()
          nf.pol = pol
          ccall((:nf_init, libantic), Nothing, 
@@ -42,23 +42,7 @@ mutable struct AnticNumberField <: SimpleNumField{fmpq}
          nf.S = s
          nf.auxilliary_data = Array{Any}(undef, 5)
          return nf
-      else
-         if haskey(AnticNumberFieldID, (parent(pol), pol, s))
-            return AnticNumberFieldID[parent(pol), pol, s]::AnticNumberField
-         else
-            nf = new()
-            nf.pol = pol
-            ccall((:nf_init, libantic), Nothing, 
-               (Ref{AnticNumberField}, Ref{fmpq_poly}), nf, pol)
-            finalizer(_AnticNumberField_clear_fn, nf)
-            nf.S = s
-            nf.auxilliary_data = Vector{Any}(undef, 5)
-            if cached
-               AnticNumberFieldID[parent(pol), pol, s] = nf
-            end
-            return nf
-         end
-      end
+      end::AnticNumberField
    end
 end
 

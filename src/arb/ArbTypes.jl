@@ -77,19 +77,13 @@ mutable struct ArbField <: Field
 
   function ArbField(p::Int = 256; cached::Bool = true)
     arb_check_precision(p)
-    if cached && haskey(ArbFieldID, p)
-      return ArbFieldID[p]
-    else
-      z = new(p)
-      if cached
-        ArbFieldID[p] = z
-      end
-      return z
-    end
+    return get_cached!(ArbFieldID, p, cached) do
+      new(p)
+    end::ArbField
   end
 end
 
-const ArbFieldID = Dict{Int, ArbField}()
+const ArbFieldID = CacheDictType{Int, ArbField}()
 
 precision(x::ArbField) = x.prec
 
@@ -159,19 +153,13 @@ mutable struct AcbField <: Field
 
   function AcbField(p::Int = 256; cached::Bool = true)
     arb_check_precision(p)
-    if cached && haskey(AcbFieldID, p)
-      return AcbFieldID[p]
-    else
-      z = new(p)
-      if cached
-        AcbFieldID[p] = z
-      end
-      return z
-    end
+    return get_cached!(AcbFieldID, p, cached) do
+      new(p)
+    end::AcbField
   end
 end
 
-const AcbFieldID = Dict{Int, AcbField}()
+const AcbFieldID = CacheDictType{Int, AcbField}()
 
 precision(x::AcbField) = x.prec
 
@@ -266,19 +254,13 @@ mutable struct ArbPolyRing <: PolyRing{arb}
   S::Symbol
 
   function ArbPolyRing(R::ArbField, S::Symbol, cached::Bool = true)
-    if cached && haskey(ArbPolyRingID, (R, S))
-      return ArbPolyRingID[R, S]
-    else
-      z = new(R, S)
-      if cached
-        ArbPolyRingID[R, S] = z
-      end
-      return z
-    end
+    return get_cached!(ArbPolyRingID, (R, S), cached) do
+      new(R, S)
+    end::ArbPolyRing
   end
 end
 
-const ArbPolyRingID = Dict{Tuple{ArbField, Symbol}, ArbPolyRing}()
+const ArbPolyRingID = CacheDictType{Tuple{ArbField, Symbol}, ArbPolyRing}()
 
 mutable struct arb_poly <: PolyElem{arb}
   coeffs::Ptr{Nothing}
@@ -374,19 +356,13 @@ mutable struct AcbPolyRing <: PolyRing{acb}
   S::Symbol
 
   function AcbPolyRing(R::AcbField, S::Symbol, cached::Bool = true)
-    if cached && haskey(AcbPolyRingID, (R, S))
-      return AcbPolyRingID[R, S]
-    else
+    return get_cached!(AcbPolyRingID, (R, S), cached) do
       z = new(R, S)
-      if cached
-        AcbPolyRingID[R, S] = z
-      end
-      return z
-    end
+    end::AcbPolyRing
   end
 end
 
-const AcbPolyRingID = Dict{Tuple{AcbField, Symbol}, AcbPolyRing}()
+const AcbPolyRingID = CacheDictType{Tuple{AcbField, Symbol}, AcbPolyRing}()
 
 mutable struct acb_poly <: PolyElem{acb}
   coeffs::Ptr{Nothing}
@@ -494,19 +470,13 @@ mutable struct ArbMatSpace <: MatSpace{arb}
   base_ring::ArbField
 
   function ArbMatSpace(R::ArbField, r::Int, c::Int, cached::Bool = true)
-    if cached && haskey(ArbMatSpaceID, (R, r, c))
-      return ArbMatSpaceID[(R, r, c)]
-    else
-      z = new(r, c, R)
-      if cached
-        ArbMatSpaceID[(R, r, c)] = z
-      end
-      return z::ArbMatSpace
-    end
+    return get_cached!(ArbMatSpaceID, (R, r, c), cached) do
+      new(r, c, R)
+    end::ArbMatSpace
   end
 end
 
-const ArbMatSpaceID = Dict{Tuple{ArbField, Int, Int}, ArbMatSpace}()
+const ArbMatSpaceID = CacheDictType{Tuple{ArbField, Int, Int}, ArbMatSpace}()
 
 mutable struct arb_mat <: MatElem{arb}
   entries::Ptr{Nothing}
@@ -629,19 +599,13 @@ mutable struct AcbMatSpace <: MatSpace{acb}
   base_ring::AcbField
 
   function AcbMatSpace(R::AcbField, r::Int, c::Int, cached::Bool = true)
-    if cached && haskey(AcbMatSpaceID, (R, r, c))
-      return AcbMatSpaceID[(R, r, c)]
-    else
-      z = new(r, c, R)
-      if cached
-        AcbMatSpaceID[(R, r, c)] = z
-      end
-      return z::AcbMatSpace
-    end
+    return get_cached!(AcbMatSpaceID, (R, r, c), cached) do
+      new(r, c, R)
+    end::AcbMatSpace
   end
 end
 
-const AcbMatSpaceID = Dict{Tuple{AcbField, Int, Int}, AcbMatSpace}()
+const AcbMatSpaceID = CacheDictType{Tuple{AcbField, Int, Int}, AcbMatSpace}()
 
 mutable struct acb_mat <: MatElem{acb}
   entries::Ptr{Nothing}

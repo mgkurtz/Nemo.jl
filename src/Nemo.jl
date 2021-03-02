@@ -26,6 +26,9 @@ using Pkg
 
 import SHA
 
+# Type for the cache dictionary
+import AbstractAlgebra: CacheDictType, get_cached!
+
 import AbstractAlgebra: div, divrem
 
 # N.B: do not import div, divrem from Base
