@@ -852,6 +852,7 @@ function lll_with_transform(x::fmpz_mat, ctx::lll_ctx = lll_ctx(0.99, 0.51))
    for i in 1:nrows(u)
       u[i, i] = 1
    end
+   save_fmpz_mat(z, ctx)
    ccall((:fmpz_lll, libflint), Nothing,
          (Ref{fmpz_mat}, Ref{fmpz_mat}, Ref{lll_ctx}), z, u, ctx)
    return z, u
@@ -871,6 +872,7 @@ function lll(x::fmpz_mat, ctx::lll_ctx = lll_ctx(0.99, 0.51))
    if nrows(z) == 0
      return z
    end
+   save_fmpz_mat(z, ctx)
    ccall((:fmpz_lll, libflint), Nothing,
          (Ref{fmpz_mat}, Ptr{nothing}, Ref{lll_ctx}), z, C_NULL, ctx)
    return z
@@ -889,6 +891,7 @@ function lll!(x::fmpz_mat, ctx::lll_ctx = lll_ctx(0.99, 0.51))
    if nrows(x) == 0
      return x
    end
+   save_fmpz_mat(x, ctx)
    ccall((:fmpz_lll, libflint), Nothing,
          (Ref{fmpz_mat}, Ptr{nothing}, Ref{lll_ctx}), x, C_NULL, ctx)
    return x
@@ -907,6 +910,7 @@ function lll_gram_with_transform(x::fmpz_mat, ctx::lll_ctx = lll_ctx(0.99, 0.51,
    for i in 1:nrows(u)
       u[i, i] = 1
    end
+   save_fmpz_mat(z, ctx)
    ccall((:fmpz_lll, libflint), Nothing,
          (Ref{fmpz_mat}, Ref{fmpz_mat}, Ref{lll_ctx}), z, u, ctx)
    return z, u
@@ -920,6 +924,7 @@ reduction.
 """
 function lll_gram(x::fmpz_mat, ctx::lll_ctx = lll_ctx(0.99, 0.51, :gram))
    z = deepcopy(x)
+   save_fmpz_mat(z, ctx)
    ccall((:fmpz_lll, libflint), Nothing,
          (Ref{fmpz_mat}, Ptr{nothing}, Ref{lll_ctx}), z, C_NULL, ctx)
    return z
@@ -932,6 +937,7 @@ Given the Gram matrix $x$ of a matrix, compute the Gram matrix of its LLL
 reduction inplace.
 """
 function lll_gram!(x::fmpz_mat, ctx::lll_ctx = lll_ctx(0.99, 0.51, :gram))
+   save_fmpz_mat(x, ctx)
    ccall((:fmpz_lll, libflint), Nothing,
          (Ref{fmpz_mat}, Ptr{Nothing}, Ref{lll_ctx}), x, C_NULL, ctx)
    return x

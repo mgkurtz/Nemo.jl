@@ -541,4 +541,21 @@ end
 
 include("Deprecations.jl")
 
+function save_fmpz_mat(file::String, a::fmpz_mat, c)
+  open(file, "a") do f
+    print(f, c.delta, " ", c.eta, " ", c.gram_type, " ", c.rep_type, " ")
+    print(f, nrows(a), " ", ncols(a), " ")
+    for i in 1:nrows(a)
+      for j in 1:ncols(a)
+        print(f, a[i, j], " ")
+      end
+    end
+    print(f, "\n")
+  end
+end
+
+function save_fmpz_mat(a::fmpz_mat, ctx)
+  save_fmpz_mat("/tmp/dump_mat", a, ctx)
+end
+
 end # module
