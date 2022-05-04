@@ -119,6 +119,11 @@ ca_ctx_options = [
     :vieta_limit,
     :trig_form]
 
+"""
+    CalciumField <: Field
+
+Field of exact complex numbers.
+"""
 mutable struct CalciumField <: Field
    ext_cache_items::Ptr{Nothing}
    ext_cache_length::Int
@@ -140,6 +145,14 @@ mutable struct CalciumField <: Field
    extended::Bool
    refcount::Int
 
+   """
+       CalciumField(; extended=false, options=Dict())
+
+   Create a complex field.
+
+   For further documentation please refer to the manual.
+   // Why not use keyword varargs? (lot of pros, contra is Julia#39450)
+   """
    function CalciumField(; extended::Bool=false, options::Dict{Symbol,Int}=Dict{Symbol,Int}())
       C = new()
 

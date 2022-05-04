@@ -87,9 +87,19 @@ end
 #
 ################################################################################
 
+"""
+    ArbField <: Field
+
+Field of real numbers with interval arithmetic.
+"""
 mutable struct ArbField <: Field
   prec::Int
 
+  """
+      ArbField(p=256; cached=true)
+
+  Create field with `p` bits precision; optionally cache the field.
+  """
   function ArbField(p::Int = 256; cached::Bool = true)
     arb_check_precision(p)
     return get_cached!(ArbFieldID, p, cached) do

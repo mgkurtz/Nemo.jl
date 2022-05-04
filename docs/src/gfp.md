@@ -10,6 +10,10 @@ polynomials are not used and no generator is given.
 
 For convenience, the following constructors are provided.
 
+```@docs
+GF
+```
+
 ```julia
 GF(n::UInt)
 GF(n::Int)
