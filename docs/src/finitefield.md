@@ -16,6 +16,10 @@ for convenience we define
 FiniteField = FlintFiniteField
 ```
 
+```@docs
+FiniteField
+```
+
 so that finite fields can be constructed using `FiniteField` rather than
 `FlintFiniteField`. Note that this is the name of the constructor, but not of
 finite field type.

@@ -19,6 +19,10 @@ the internal representation;
 Calcium constructs extension numbers and fields automatically
 as needed to perform operations.
 
+```@docs
+CalciumField
+```
+
 The user must create a `CalciumField` instance which represents the
 mathematical domain $\mathbb{C}$. This parent object holds a cache of extension
 numbers and fields used to represent individual elements. It also
