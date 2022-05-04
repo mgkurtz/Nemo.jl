@@ -2,7 +2,7 @@
 CurrentModule = Nemo
 ```
 
-# Algebraic numbers
+# [Algebraic numbers](@id QQBar)
 
 Nemo allows working with exact real and complex algebraic numbers.
 
