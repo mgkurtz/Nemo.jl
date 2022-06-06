@@ -20,6 +20,10 @@ ComplexField = AcbField
 so that one can construct the Arb complex field parent using `ComplexField`
 instead of `AcbField`.
 
+```@docs
+ComplexField
+```
+
 The types of complex boxes in Nemo are given in the following table, along with
 the libraries that provide them and the associated types of the parent objects.
 

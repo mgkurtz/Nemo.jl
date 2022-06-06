@@ -11,11 +11,6 @@ represented in mid-rad interval form $[m \pm r] = [m-r, m+r]$.
 The Arb real field is constructed using the `ArbField` constructor. This
 constructs the parent object for the Arb real field.
 
-```@docs
-ArbField
-RealField
-```
-
 However, we define
 
 ```
@@ -24,6 +19,10 @@ RealField = ArbField
 
 so that one can construct the Arb real field parent object using `RealField`
 instead of `ArbField`.
+
+```@docs
+RealField  # see https://github.com/JuliaDocs/Documenter.jl/issues/396
+```
 
 The types of real balls in Nemo are given in the following table, along with
 the libraries that provide them and the associated types of the parent objects.
