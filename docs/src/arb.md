@@ -11,6 +11,11 @@ represented in mid-rad interval form $[m \pm r] = [m-r, m+r]$.
 The Arb real field is constructed using the `ArbField` constructor. This
 constructs the parent object for the Arb real field.
 
+```@docs
+ArbField
+RealField
+```
+
 However, we define
 
 ```
