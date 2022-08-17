@@ -468,6 +468,11 @@ end
 #
 ###############################################################################
 
+"""
+    GF(n)
+
+Galois Field of prime number `n`.
+"""
 function GF(n::Int; cached::Bool=true)
    (n <= 0) && throw(DomainError(n, "Characteristic must be positive"))
    un = UInt(n)
