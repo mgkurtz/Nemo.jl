@@ -792,8 +792,6 @@ end
 
 (x::AcbMatSpace)(y::Rational{T}) where {T <: Integer} = x(QQFieldElem(y))
 
-(x::AcbMatSpace)(y::acb_mat) = y
-
 ###############################################################################
 #
 #   Matrix constructor

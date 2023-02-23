@@ -680,8 +680,6 @@ function (x::ArbMatSpace)(y::Union{Int, UInt, ZZRingElem, QQFieldElem, Float64,
    return z
 end
 
-(x::ArbMatSpace)(y::arb_mat) = y
-
 ###############################################################################
 #
 #   Matrix constructor

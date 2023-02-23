@@ -894,8 +894,6 @@ function (a::QQMatrixSpace)(M::ZZMatrix)
    return z
 end
 
-(a::QQMatrixSpace)(d::QQMatrix) = d
-
 ###############################################################################
 #
 #   Promotions

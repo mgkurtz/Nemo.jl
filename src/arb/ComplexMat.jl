@@ -782,8 +782,6 @@ end
 
 (x::ComplexMatSpace)(y::Rational{T}) where {T <: Integer} = x(QQFieldElem(y))
 
-(x::ComplexMatSpace)(y::ComplexMat) = y
-
 ###############################################################################
 #
 #   Matrix constructor

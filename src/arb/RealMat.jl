@@ -672,8 +672,6 @@ function (x::RealMatSpace)(y::Union{Int, UInt, ZZRingElem, QQFieldElem, Float64,
    return z
 end
 
-(x::RealMatSpace)(y::RealMat) = y
-
 ###############################################################################
 #
 #   Matrix constructor
