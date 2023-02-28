@@ -10,11 +10,32 @@
 #
 ###############################################################################
 
+zz_ring_doc = md"""
+    ZZRing <: Ring
+    ZZRingElem <: RingElem
+
+The ring of integers $\mathbb Z$ and its elements.
+For convenience, we predefine the global variable `ZZ = ZZRing()`,
+so we can create elements via [`ZZ(x)`](@ref `(::Ring)(x)`).
+
+# Examples
+
+```jldoctest
+julia> ZZ(2)
+2
+
+julia> ZZ(2)^100
+1267650600228229401496703205376
+```
+"""
+
+@doc zz_ring_doc
 struct ZZRing <: Ring
 end
 
 const FlintZZ = ZZRing()
 
+@doc zz_ring_doc
 mutable struct ZZRingElem <: RingElem
     d::Int
 
@@ -116,11 +137,34 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    QQField <: FracField{ZZRingElem}
+
+The field of rationals $\mathbb Q$.
+For convenience, we predefine the global variable `QQ = QQField()`.
+
+See [`QQFieldElem`](@ref) for elements and usage.
+"""
 struct QQField <: FracField{ZZRingElem}
 end
 
 const FlintQQ = QQField()
 
+@doc md"""
+    QQFieldElem <: FracFieldElem{ZZRingElem}
+
+An element of $\mathbb Q$.
+
+# Examples
+
+```jldoctest
+julia> QQ(2//3) == ZZ(2)//ZZ(3)
+true
+
+julia> QQ(1//6) - QQ(1//7)
+1//42
+```
+"""
 mutable struct QQFieldElem <: FracElem{ZZRingElem}
    num::Int
    den::Int
@@ -387,6 +431,13 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    zzModRing <: Ring
+
+The ring $\mathbb Z/n\mathbb Z$ for some $n$. See [`residue_ring`](@ref).
+Implementation for the modulus being a machine integer [`Int`](@ref).
+For the modulus being a [`ZZRingElem`](@ref) see [`ZZModRing`](@ref).
+"""
 @attributes mutable struct zzModRing <: Ring
    n::UInt
    ninv::UInt
@@ -401,6 +452,11 @@ end
 
 const NmodRingID = Dict{UInt, zzModRing}()
 
+@doc md"""
+    zzModRingElem <: RingElem
+
+An element of a ring $\mathbb Z/n\mathbb Z$. See [`zzModRing`](@ref).
+"""
 struct zzModRingElem <: ResElem{UInt}
    data::UInt
    parent::zzModRing
@@ -412,6 +468,12 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    fpField <: FinField
+
+A Galois field $\mathbb F_p$ for some prime $p$. See [`GF`](@ref).
+Implementation for $p$ being a machine integer [`Int`](@ref).
+"""
 @attributes mutable struct fpField <: FinField
    n::UInt
    ninv::UInt
@@ -426,6 +488,11 @@ end
 
 const GaloisFieldID = Dict{UInt, fpField}()
 
+@doc md"""
+    fpFieldElem <: FinFieldElem
+
+An element of a Galois field $\mathbb F_p$. See [`fpField`](@ref).
+"""
 struct fpFieldElem <: FinFieldElem
    data::UInt
    parent::fpField
@@ -459,6 +526,13 @@ function _fmpz_mod_ctx_clear_fn(a::fmpz_mod_ctx_struct)
    ccall((:fmpz_mod_ctx_clear, libflint), Nothing, (Ref{fmpz_mod_ctx_struct},), a)
 end
 
+@doc md"""
+    ZZModRing <: Ring
+
+The ring $\mathbb Z/n\mathbb Z$ for some $n$. See [`residue_ring`](@ref).
+Implementation for the modulus being a big integer [`ZZRingElem`](@ref).
+For the modulus being an [`Int`](@ref) see [`zzModRing`](@ref).
+"""
 @attributes mutable struct ZZModRing <: Ring
    n::ZZRingElem
    ninv::fmpz_mod_ctx_struct
@@ -474,6 +548,11 @@ end
 
 const FmpzModRingID = Dict{ZZRingElem, ZZModRing}()
 
+@doc md"""
+    ZZModRingElem <: RingElem
+
+An element of a ring $\mathbb Z/n\mathbb Z$. See [`ZZModRing`](@ref).
+"""
 struct ZZModRingElem <: ResElem{ZZRingElem}
    data::ZZRingElem
    parent::ZZModRing
@@ -485,6 +564,12 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    FpField <: FinField
+
+A Galois field $\mathbb F_p$ for some prime $p$. See [`GF`](@ref).
+Implementation for $p$ being a big integer [`ZZRingElem`](@ref).
+"""
 @attributes mutable struct FpField <: FinField
    n::ZZRingElem
    ninv::fmpz_mod_ctx_struct
@@ -501,6 +586,11 @@ end
 
 const GaloisFmpzFieldID = Dict{ZZRingElem, FpField}()
 
+@doc md"""
+    FpFieldElem <: FinFieldElem
+
+An element of a Galois field $\mathbb F_p$. See [`FpField`](@ref).
+"""
 struct FpFieldElem <: FinFieldElem
    data::ZZRingElem
    parent::FpField
@@ -2112,6 +2202,12 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    fqPolyRepField <: FinField
+
+A finite field. Implemented as $\mathbb F_p[t]/f$ for the prime $p$ being an [`Int`](@ref).
+See [`FqPolyRepField`](@ref) for $p$ being a [`ZZRingElem`](@ref). See [`fqPolyRepFieldElem`](@ref) for elements.
+"""
 @attributes mutable struct fqPolyRepField <: FinField
    p :: Int
    n :: Int
@@ -2191,6 +2287,12 @@ function _FqNmodFiniteField_clear_fn(a :: fqPolyRepField)
    ccall((:fq_nmod_ctx_clear, libflint), Nothing, (Ref{fqPolyRepField},), a)
 end
 
+@doc md"""
+    fqPolyRepFieldElem <: FinFieldElem
+
+An element $\sum_{i=0}^{d-1} a_i t^i$ of a finite field $\mathbb F_{p^d} \cong \mathbb F_p[t]/f$.
+Represented internally as $(a_i)_{0\le i<d}$. See [`fqPolyRepField`](@ref).
+"""
 mutable struct fqPolyRepFieldElem <: FinFieldElem
    coeffs :: Ptr{Nothing}
    alloc :: Int
@@ -2250,6 +2352,11 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    FqField <: FinField
+
+A finite field. The constructor automatically determines a fast implementation.
+"""
 @attributes mutable struct FqField <: FinField
    # fq_default_ctx_struct is 200 bytes on 64 bit machine
    opaque::NTuple{200, Int8}
@@ -2354,6 +2461,11 @@ function _FqDefaultFiniteField_clear_fn(a :: FqField)
    ccall((:fq_default_ctx_clear, libflint), Nothing, (Ref{FqField},), a)
 end
 
+@doc md"""
+    FqFieldElem <: FinFieldElem
+
+An element of a finite field. See [`FqField`](@ref).
+"""
 mutable struct FqFieldElem <: FinFieldElem
    opaque::NTuple{48, Int8} # fq_default_struct is 48 bytes on a 64 bit machine
    parent::FqField
@@ -2477,6 +2589,12 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    FqPolyRepField <: FinField
+
+A finite field. Implemented as $\mathbb F_p[t]/f$ for the prime $p$ being a [`ZZRingElem`](@ref).
+See [`fqPolyRepField`](@ref) for $p$ being an [`Int`](@ref). See [`FqPolyRepFieldElem`](@ref) for elements.
+"""
 @attributes mutable struct FqPolyRepField <: FinField
    p::Int # fmpz_t
    add_fxn::Ptr{Nothing}
@@ -2553,6 +2671,12 @@ function _FqFiniteField_clear_fn(a :: FqPolyRepField)
    ccall((:fq_ctx_clear, libflint), Nothing, (Ref{FqPolyRepField},), a)
 end
 
+@doc md"""
+    FqPolyRepFieldElem <: FinFieldElem
+
+An element $\sum_{i=0}^{d-1} a_i t^i$ of a finite field $\mathbb F_{p^d} \cong \mathbb F_p[t]/f$.
+Represented internally as $(a_i)_{0\le i<d}$. See [`FqPolyRepField`](@ref).
+"""
 mutable struct FqPolyRepFieldElem <: FinFieldElem
    coeffs :: Ptr{Nothing}
    alloc :: Int
@@ -2866,6 +2990,11 @@ const NALocalFieldElem = NonArchLocalFieldElem
 
 const flint_padic_printing_mode = [:terse, :series, :val_unit]
 
+@doc md"""
+    FlintPadicField <: FlintLocalField <: NonArchLocalField <: Field
+
+A $p$-adic field for some prime $p$.
+"""
 mutable struct FlintPadicField <: FlintLocalField
    p::Int
    pinv::Float64
@@ -2896,6 +3025,11 @@ function _padic_ctx_clear_fn(a::FlintPadicField)
    ccall((:padic_ctx_clear, libflint), Nothing, (Ref{FlintPadicField},), a)
 end
 
+@doc md"""
+    padic <: FlintLocalFieldElem <: NonArchLocalFieldElem <: FieldElem
+
+An element of a $p$-adic field. See [`FlintPadicField`](@ref).
+"""
 mutable struct padic <: FlintLocalFieldElem
    u :: Int
    v :: Int
@@ -2920,6 +3054,11 @@ end
 #
 ###############################################################################
 
+@doc md"""
+    FlintQadicField <: FlintLocalField <: NonArchLocalField <: Field
+
+A $p^n$-adic field for some prime power $p^n$.
+"""
 mutable struct FlintQadicField <: FlintLocalField
    p::Int
    pinv::Float64
@@ -2957,6 +3096,11 @@ function _qadic_ctx_clear_fn(a::FlintQadicField)
    ccall((:qadic_ctx_clear, libflint), Nothing, (Ref{FlintQadicField},), a)
 end
 
+@doc md"""
+    qadic <: FlintLocalFieldElem <: NonArchLocalFieldElem <: FieldElem
+
+An element of a $q$-adic field. See [`FlintQadicField`](@ref).
+"""
 mutable struct qadic <: FlintLocalFieldElem
    coeffs::Int
    alloc::Int
@@ -6610,7 +6754,7 @@ end
 
 ################################################################################
 #
-# Type unions
+#   Type unions
 #
 ################################################################################
 
@@ -6640,6 +6784,12 @@ const _fq_default_mpoly_union = Union{AbstractAlgebra.Generic.MPoly{FqPolyRepFie
                                       fpMPolyRingElem,
                                       #FpMPolyRingElem
                                       }
+
+###############################################################################
+#
+#   FqMPolyRing / FqMPolyRingElem
+#
+###############################################################################
 
 @attributes mutable struct FqMPolyRing <: MPolyRing{FqFieldElem}
     data::Union{fpMPolyRing,
@@ -6693,3 +6843,78 @@ macro fq_default_mpoly_do_op(f, R, a...)
     return res
 end
 
+###############################################################################
+#
+#   Docstrings for the systematically added types in this file
+#
+###############################################################################
+
+module DocstringInfo
+using Markdown
+
+struct RingInfo
+    ring_name :: String
+    latex :: String
+end
+Base.convert(::Type{RingInfo}, (name, latex)::Tuple{String, String}) =
+    RingInfo(name, '$'*latex*'$')
+
+base_rings = Dict{Symbol, RingInfo}(
+    :ZZ => ("ZZRing", "\\mathbb Z"),
+    :QQ => ("QQField", "\\mathbb Q"),
+    :ZZMod => ("ZZModRing", "\\mathbb Z/n\\mathbb Z"),
+    :zzMod => ("zzModRing", "\\mathbb Z/n\\mathbb Z"),
+    :Fq => ("FqField", "\\mathbb F_q"),
+    :Fp => ("FpField", "\\mathbb F_p"),
+    :fp => ("fpField", "\\mathbb F_p"),
+    :FqPolyRep => ("FqPolyRepField", "\\mathbb F_q"),
+    :fqPolyRep => ("fqPolyRepField", "\\mathbb F_q")
+)
+
+struct ConstructionInfo
+    abstract_type :: String
+    super_type :: String
+    description :: String
+    reference :: String
+end
+Base.convert(::Type{ConstructionInfo}, x::NTuple{4, String}) = ConstructionInfo(x...)
+
+constructions = Dict{Symbol, ConstructionInfo}(
+    :MatrixSpace => ("MatSpace", "Module", "A matrix space", "matrix_space"),
+    :Matrix => ("MatElem", "ModuleElem", "A matrix", "matrix(::Ring)"),
+    :PolyRing => ("PolyRing", "Ring", "The polynomial ring", "polynomial_ring(R, :x)"),
+    :PolyRingElem => ("PolyRingElem", "RingElem", "A polynomial", "polynomial_ring(R, :x)"),
+    :MPolyRing => ("MPolyRing", "Ring", "A multivariate polynomial ring", "polynomial_ring(R, :x, :y)"),
+    :MPolyRingElem => ("MPolyRingElem", "RingElem", "A multivariate polynomial", "polynomial_ring(R, :x, :y)"),
+)
+
+@doc md"""
+    docstring(base::Symbol, suffix::Symbol)
+
+Docstring for some constructions of rings.
+
+# Examples
+```julia
+@doc docstring(:ZZ, :PolyRing)
+ZZPolyRing
+
+@doc Markdown.MD(docstring(:zzMod, :MatrixSpace), md"Contains $n^{rc}" elements.")
+zzModMatrixSpace
+```
+"""
+function docstring(base::Symbol, suffix::Symbol)
+    name = String(base) * String(suffix)
+    (; ring_name, latex) = base_rings[base]
+    (; abstract_type, super_type, description, reference) = constructions[suffix]
+    Markdown.parse("""
+        $name <: $abstract_type{$(ring_name)Elem} <: $super_type
+
+    $description over $latex. See [`$reference`](@ref).
+    """)
+end
+end
+_docstring = DocstringInfo.docstring
+
+for base in keys(DocstringInfo.base_rings), suffix in keys(DocstringInfo.constructions)
+    eval(:(@doc $(_docstring(base, suffix)) $(Symbol(String(base)*String(suffix)))))
+end
