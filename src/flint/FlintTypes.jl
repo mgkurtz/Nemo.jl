@@ -15,7 +15,7 @@ zz_ring_doc = md"""
     ZZRingElem <: RingElem
 
 The ring of integers $\mathbb Z$ and its elements.
-For convenience, we predefine the global variable `ZZ = ZZRing()`,
+For convenience, we predefine the global variable `const ZZ = ZZRing()`,
 so we can create elements via [`ZZ(x)`](@ref `(::Ring)(x)`).
 
 # Examples
@@ -137,23 +137,12 @@ end
 #
 ###############################################################################
 
-@doc md"""
+qq_field_doc = md"""
     QQField <: FracField{ZZRingElem}
-
-The field of rationals $\mathbb Q$.
-For convenience, we predefine the global variable `QQ = QQField()`.
-
-See [`QQFieldElem`](@ref) for elements and usage.
-"""
-struct QQField <: FracField{ZZRingElem}
-end
-
-const FlintQQ = QQField()
-
-@doc md"""
     QQFieldElem <: FracFieldElem{ZZRingElem}
 
-An element of $\mathbb Q$.
+The field of rationals $\mathbb Q$ and its elements.
+For convenience, we predefine the global variable `const QQ = QQField()`.
 
 # Examples
 
@@ -165,6 +154,14 @@ julia> QQ(1//6) - QQ(1//7)
 1//42
 ```
 """
+
+@doc qq_field_doc
+struct QQField <: FracField{ZZRingElem}
+end
+
+const FlintQQ = QQField()
+
+@doc qq_field_doc
 mutable struct QQFieldElem <: FracElem{ZZRingElem}
    num::Int
    den::Int
