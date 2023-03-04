@@ -6850,8 +6850,8 @@ module DocstringInfo
 using Markdown
 
 struct RingInfo
-    ring_name :: String
-    latex :: String
+    ring_name::String
+    latex::String
 end
 Base.convert(::Type{RingInfo}, (name, latex)::Tuple{String, String}) =
     RingInfo(name, '$'*latex*'$')
@@ -6865,14 +6865,14 @@ base_rings = Dict{Symbol, RingInfo}(
     :Fp => ("FpField", "\\mathbb F_p"),
     :fp => ("fpField", "\\mathbb F_p"),
     :FqPolyRep => ("FqPolyRepField", "\\mathbb F_q"),
-    :fqPolyRep => ("fqPolyRepField", "\\mathbb F_q")
+    :fqPolyRep => ("fqPolyRepField", "\\mathbb F_q"),
 )
 
 struct ConstructionInfo
-    abstract_type :: String
-    super_type :: String
-    description :: String
-    reference :: String
+    abstract_type::String
+    super_type::String
+    description::String
+    reference::String
 end
 Base.convert(::Type{ConstructionInfo}, x::NTuple{4, String}) = ConstructionInfo(x...)
 
