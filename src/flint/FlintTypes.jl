@@ -6849,14 +6849,7 @@ end
 module DocstringInfo
 using Markdown
 
-struct RingInfo
-    ring_name::String
-    latex::String
-end
-Base.convert(::Type{RingInfo}, (name, latex)::Tuple{String, String}) =
-    RingInfo(name, '$'*latex*'$')
-
-base_rings = Dict{Symbol, RingInfo}(
+base_rings = Dict(
     :ZZ => ("ZZRing", "\\mathbb Z"),
     :QQ => ("QQField", "\\mathbb Q"),
     :ZZMod => ("ZZModRing", "\\mathbb Z/n\\mathbb Z"),
@@ -6868,15 +6861,7 @@ base_rings = Dict{Symbol, RingInfo}(
     :fqPolyRep => ("fqPolyRepField", "\\mathbb F_q"),
 )
 
-struct ConstructionInfo
-    abstract_type::String
-    super_type::String
-    description::String
-    reference::String
-end
-Base.convert(::Type{ConstructionInfo}, x::NTuple{4, String}) = ConstructionInfo(x...)
-
-constructions = Dict{Symbol, ConstructionInfo}(
+constructions = Dict(
     :MatrixSpace => ("MatSpace", "Module", "A matrix space", "matrix_space"),
     :Matrix => ("MatElem", "ModuleElem", "A matrix", "matrix(::Ring)"),
     :PolyRing => ("PolyRing", "Ring", "The polynomial ring", "polynomial_ring(R, :x)"),
@@ -6901,17 +6886,19 @@ zzModMatrixSpace
 """
 function docstring(base::Symbol, suffix::Symbol)
     name = String(base) * String(suffix)
-    (; ring_name, latex) = base_rings[base]
-    (; abstract_type, super_type, description, reference) = constructions[suffix]
+    ring_name, latex = base_rings[base]
+    latex = '$' * latex * '$'
+    abstract_type, super_type, description, reference = constructions[suffix]
     Markdown.parse("""
         $name <: $abstract_type{$(ring_name)Elem} <: $super_type
 
     $description over $latex. See [`$reference`](@ref).
     """)
 end
-end
-_docstring = DocstringInfo.docstring
 
-for base in keys(DocstringInfo.base_rings), suffix in keys(DocstringInfo.constructions)
-    eval(:(@doc $(_docstring(base, suffix)) $(Symbol(String(base)*String(suffix)))))
+for base in keys(base_rings), suffix in keys(constructions)
+    d = docstring(base, suffix)
+    name = Symbol(String(base)*String(suffix))
+    Core.eval(parentmodule(DocstringInfo), :(Core.@doc $d $name))
+end
 end
