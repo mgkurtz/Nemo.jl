@@ -1064,18 +1064,3 @@ end
 function divexact(f::FpMPolyRingElem, a::IntegerUnion; check::Bool=true)
   return divexact(f, base_ring(f)(a))
 end
-
-###############################################################################
-#
-#   polynomial_ring constructor
-#
-###############################################################################
-
-function polynomial_ring(R::FpField, s::Vector{Symbol}; cached::Bool = true, ordering::Symbol = :lex)
-   parent_obj = FpMPolyRing(R, s, ordering, cached)
-   return tuple(parent_obj, gens(parent_obj))
-end
-
-function polynomial_ring(R::FpField, s::Vector{String}; cached::Bool = true, ordering::Symbol = :lex)
-   return polynomial_ring(R, [Symbol(x) for x in s]; cached=cached, ordering=ordering)
-end

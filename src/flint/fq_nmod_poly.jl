@@ -879,22 +879,3 @@ function (R::fqPolyRepPolyRing)(x::fqPolyRepPolyRingElem)
   parent(x) != R && error("Unable to coerce to polynomial")
   return x
 end
-
-################################################################################
-#
-#   polynomial_ring constructor
-#
-################################################################################
-
-function polynomial_ring(R::fqPolyRepField, s::Symbol; cached = true)
-   parent_obj = fqPolyRepPolyRing(R, s, cached)
-   return parent_obj, parent_obj([R(0), R(1)])
-end
-
-function polynomial_ring(R::fqPolyRepField, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::fqPolyRepField)
-   return fqPolyRepPolyRing(R, :x, false)
-end

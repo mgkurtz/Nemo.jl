@@ -609,23 +609,3 @@ function (R::fpPolyRing)(x::ZZPolyRingElem)
   z.parent = R
   return z
 end
-
-################################################################################
-#
-#  Polynomial ring constructor
-#
-################################################################################
-
-function polynomial_ring(R::fpField, s::Symbol; cached=true)
-   parent_obj = fpPolyRing(R, s, cached)
-
-   return parent_obj, parent_obj([R(0), R(1)])
-end
-
-function polynomial_ring(R::fpField, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::fpField)
-   return fpPolyRing(R, :x, false)
-end

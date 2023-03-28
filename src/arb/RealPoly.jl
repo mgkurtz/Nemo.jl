@@ -766,22 +766,3 @@ end
 function (R::RealPolyRing)(p::AbstractAlgebra.Generic.Poly{RealFieldElem})
    return R(p.coeffs)
 end
-
-################################################################################
-#
-#  polynomial_ring constructor
-#
-################################################################################
-
-function polynomial_ring(R::RealField, s::Symbol; cached = true)
-  parent_obj = RealPolyRing(R, s, cached)
-  return parent_obj, parent_obj(ZZPolyRingElem([ZZRingElem(0), ZZRingElem(1)]))
-end
-
-function polynomial_ring(R::RealField, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::RealField)
-   return RealPolyRing(R, :x, false)
-end

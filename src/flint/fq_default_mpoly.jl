@@ -593,37 +593,3 @@ end
 function divexact(a::FqMPolyRingElem, b::IntegerUnion; check::Bool=true)
   return a*inv(base_ring(a)(b))
 end
-
-###############################################################################
-#
-#   polynomial_ring constructor
-#
-###############################################################################
-
-function polynomial_ring(R::FqField, s::Vector{Symbol}; cached::Bool = true, ordering::Symbol = :lex)
-    # try just FqPolyRepFieldElem for now
-    m = modulus(R)
-    p = characteristic(R)
-    if fits(UInt, p)
-        Fq = GF(UInt(p))
-        if isone(degree(m))
-            Fqx = polynomial_ring(Fq, s, cached = cached, ordering = ordering)[1]
-            parent_obj = FqMPolyRing(Fqx, R, 3, s, ordering, cached)
-        else
-            mm = polynomial_ring(Fq, "x")[1](lift(polynomial_ring(ZZ, "x")[1], m))
-            Fq = FlintFiniteField(mm, R.var, cached = cached, check = false)[1]
-            Fqx = polynomial_ring(Fq, s, cached = cached, ordering = ordering)[1]
-            parent_obj = FqMPolyRing(Fqx, R, 2, s, ordering, cached)
-        end
-    else
-        Fq = FqPolyRepField(m, Symbol(R.var), cached, check = false)
-        Fqx = AbstractAlgebra.Generic.polynomial_ring(Fq, s, cached = cached, ordering = ordering)[1]
-        parent_obj = FqMPolyRing(Fqx, R, 1, s, ordering, cached)
-    end
-    return parent_obj, gens(parent_obj)
-end
-
-function polynomial_ring(R::FqField, s::Vector{String}; cached::Bool = true, ordering::Symbol = :lex)
-   return polynomial_ring(R, [Symbol(x) for x in s]; cached=cached, ordering=ordering)
-end
-

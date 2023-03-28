@@ -1272,6 +1272,7 @@ const flint_orderings = [:lex, :deglex, :degrevlex]
       end
    end
 end
+ZZMPolyRing(::ZZRing, s::Vector{Symbol}, S::Symbol, cached::Bool=true) = ZZMPolyRing(s, S, cached)
 
 function _fmpz_mpoly_ctx_clear_fn(a::ZZMPolyRing)
    ccall((:fmpz_mpoly_ctx_clear, libflint), Nothing,
@@ -1467,6 +1468,7 @@ end
       end
    end
 end
+QQMPolyRing(::QQField, s::Vector{Symbol}, S::Symbol, cached::Bool=true) = QQMPolyRing(s, S, cached)
 
 function _fmpq_mpoly_ctx_clear_fn(a::QQMPolyRing)
   ccall((:fmpq_mpoly_ctx_clear, libflint), Nothing,
@@ -6787,23 +6789,38 @@ const _fq_default_mpoly_union = Union{AbstractAlgebra.Generic.MPoly{FqPolyRepFie
 ###############################################################################
 
 @attributes mutable struct FqMPolyRing <: MPolyRing{FqFieldElem}
-    data::Union{fpMPolyRing,
-                #FpMPolyRing,
-                fqPolyRepMPolyRing,
-                AbstractAlgebra.Generic.MPolyRing{FqPolyRepFieldElem}}
-    base_ring::FqField
-    typ::Int    # keep these in sync with fq_default_mpoly_do_op and
-                # the polynomial_ring constructor
+   data::Union{fpMPolyRing,
+               #FpMPolyRing,
+               fqPolyRepMPolyRing,
+               AbstractAlgebra.Generic.MPolyRing{FqPolyRepFieldElem}}
+   base_ring::FqField
+   typ::Int    # keep these in sync with @fq_default_mpoly_do_op
 
-    function FqMPolyRing(a, b::FqField, c::Int, d::Vector{Symbol}, ord::Symbol, cached = true)
-        return get_cached!(FqDefaultMPolyID, (b, c, d, ord), cached) do
-            return new(a, b, c)
-        end::FqMPolyRing
-    end
+   function FqMPolyRing(R::FqField, s::Vector{Symbol}, ordering::Symbol = :lex, cached::Bool = true)
+      return get_cached!(FqDefaultMPolyID, (R, s, ordering), cached) do
+         # in the following all constructors should use chached = false
+         m = modulus(R)
+         p = characteristic(R)
+         if fits(UInt, p)
+            Fq = GF(UInt(p))
+            if isone(degree(m))
+               Fqx = polynomial_ring(Fq, s, cached = cached, ordering = ordering)[1]
+               return new(Fqx, R, 3)
+            end
+            mm = polynomial_ring(Fq, "x")[1](lift(polynomial_ring(ZZ, "x")[1], m))
+            Fq = FlintFiniteField(mm, R.var, cached = cached, check = false)[1]
+            Fqx = polynomial_ring(Fq, s, cached = cached, ordering = ordering)[1]
+            return new(Fqx, R, 2)
+         end
+         Fq = FqPolyRepField(m, Symbol(R.var), cached, check = false)
+         Fqx = AbstractAlgebra.Generic.polynomial_ring(Fq, s, cached = cached, ordering = ordering)[1]
+         return new(Fqx, R, 1)
+      end::FqMPolyRing
+   end
 end
 
 const FqDefaultMPolyID = CacheDictType{
-                              Tuple{FqField, Int, Vector{Symbol}, Symbol},
+                              Tuple{FqField, Vector{Symbol}, Symbol},
                               FqMPolyRing}()
 
 mutable struct FqMPolyRingElem <: MPolyRingElem{FqFieldElem}

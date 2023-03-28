@@ -1204,27 +1204,3 @@ end
 function divexact(f::zzModMPolyRingElem, a::IntegerUnion; check::Bool=true)
   return divexact(f, base_ring(f)(a))
 end
-
-###############################################################################
-#
-#   polynomial_ring constructor
-#
-###############################################################################
-
-function polynomial_ring(R::zzModRing, s::Vector{Symbol}; cached::Bool = true, ordering::Symbol = :lex)
-   parent_obj = zzModMPolyRing(R, s, ordering, cached)
-   return tuple(parent_obj, gens(parent_obj))
-end
-
-function polynomial_ring(R::zzModRing, s::Vector{String}; cached::Bool = true, ordering::Symbol = :lex)
-   return polynomial_ring(R, [Symbol(x) for x in s]; cached=cached, ordering=ordering)
-end
-
-function polynomial_ring(R::fpField, s::Vector{Symbol}; cached::Bool = true, ordering::Symbol = :lex)
-   parent_obj = fpMPolyRing(R, s, ordering, cached)
-   return tuple(parent_obj, gens(parent_obj))   
-end
-
-function polynomial_ring(R::fpField, s::Vector{String}; cached::Bool = true, ordering::Symbol = :lex)
-   return polynomial_ring(R, [Symbol(x) for x in s]; cached=cached, ordering=ordering)
-end

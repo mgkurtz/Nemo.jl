@@ -958,23 +958,3 @@ end
 (a::ZZPolyRing)(b::Vector{T}) where {T <: Integer} = a(map(ZZRingElem, b))
 
 (a::ZZPolyRing)(b::ZZPolyRingElem) = b
-
-###############################################################################
-#
-#   polynomial_ring constructor
-#
-###############################################################################
-
-function polynomial_ring(R::ZZRing, s::Symbol; cached = true)
-   parent_obj = ZZPolyRing(R, s, cached)
-
-   return parent_obj, parent_obj([ZZRingElem(0), ZZRingElem(1)])
-end
-
-function polynomial_ring(R::ZZRing, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::ZZRing)
-   return ZZPolyRing(R, :x, false)
-end

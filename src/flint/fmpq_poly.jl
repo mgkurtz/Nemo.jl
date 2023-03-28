@@ -902,23 +902,3 @@ function (a::QQPolyRing)(b::ZZPolyRingElem)
    z.parent = a
    return z
 end
-
-###############################################################################
-#
-#   polynomial_ring constructor
-#
-###############################################################################
-
-function polynomial_ring(R::QQField, s::Symbol; cached = true)
-   parent_obj = QQPolyRing(R, s, cached)
-
-   return parent_obj, parent_obj([QQFieldElem(0), QQFieldElem(1)])
-end
-
-function polynomial_ring(R::QQField, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::QQField)
-   return QQPolyRing(R, :x, false)
-end

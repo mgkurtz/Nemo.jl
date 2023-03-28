@@ -1081,23 +1081,3 @@ function (R::zzModPolyRing)(x::ZZPolyRingElem)
   z.parent = R
   return z
 end
-
-################################################################################
-#
-#  Polynomial ring constructor
-#
-################################################################################
-
-function polynomial_ring(R::zzModRing, s::Symbol; cached=true)
-   parent_obj = zzModPolyRing(R, s, cached)
-
-   return parent_obj, parent_obj([R(0), R(1)])
-end
-
-function polynomial_ring(R::zzModRing, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::zzModRing)
-   return zzModPolyRing(R, :x, false)
-end

@@ -852,22 +852,3 @@ function (a::ComplexPolyRing)(b::ComplexPoly)
    z.parent = a
    return z
 end
-
-################################################################################
-#
-#  polynomial_ring constructor
-#
-################################################################################
-
-function polynomial_ring(R::ComplexField, s::Symbol; cached = true)
-  parent_obj = ComplexPolyRing(R, s, cached)
-  return parent_obj, parent_obj(ZZPolyRingElem([ZZRingElem(0), ZZRingElem(1)]))
-end
-
-function polynomial_ring(R::ComplexField, s::AbstractString; cached = true)
-   return polynomial_ring(R, Symbol(s); cached=cached)
-end
-
-function PolyRing(R::ComplexField)
-   return ComplexPolyRing(R, :x, false)
-end
