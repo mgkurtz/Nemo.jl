@@ -1152,14 +1152,14 @@ end
 RandomExtensions.maketype(K::AnticNumberField, _) = elem_type(K)
 
 function rand(rng::AbstractRNG, sp::SamplerTrivial{<:Make2{nf_elem, AnticNumberField,
-                                                           UnitRange{Int}}})
+                                                           <:AbstractUnitRange{Int}}})
    K, r = sp[][1:end]
    R = parent(K.pol)
    n = degree(K.pol)
    return K(rand(rng, R, (n-1):(n-1), r))
 end
 
-rand(rng::AbstractRNG, K::AnticNumberField, r::UnitRange{Int}) = rand(rng, make(K, r))
+rand(rng::AbstractRNG, K::AnticNumberField, r::AbstractUnitRange{Int}) = rand(rng, make(K, r))
 
 rand(K::AnticNumberField, r) = rand(Random.GLOBAL_RNG, K, r)
 

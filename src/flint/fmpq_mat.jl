@@ -74,8 +74,8 @@ function Base.view(x::QQMatrix, r1::Int, c1::Int, r2::Int, c2::Int)
   return b
 end
 
-function Base.view(x::QQMatrix, r::UnitRange{Int}, c::UnitRange{Int})
-  return Base.view(x, r.start, c.start, r.stop, c.stop)
+function Base.view(x::QQMatrix, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int})
+  return Base.view(x, first(r), first(c), last(r), last(c))
 end
 
 function _fmpq_mat_window_clear_fn(a::QQMatrix)
@@ -86,11 +86,11 @@ function sub(x::QQMatrix, r1::Int, c1::Int, r2::Int, c2::Int)
    return deepcopy(view(x, r1, c1, r2, c2))
 end
 
-function sub(x::QQMatrix, r::UnitRange{Int}, c::UnitRange{Int})
+function sub(x::QQMatrix, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int})
    return deepcopy(view(x, r, c))
 end
 
-getindex(x::QQMatrix, r::UnitRange{Int}, c::UnitRange{Int}) = sub(x, r, c)
+getindex(x::QQMatrix, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int}) = sub(x, r, c)
 
 ###############################################################################
 #

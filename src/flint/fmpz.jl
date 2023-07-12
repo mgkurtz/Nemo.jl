@@ -90,7 +90,7 @@ is_domain_type(::Type{ZZRingElem}) = true
 # `length` should return an Integer, so BigInt seems appropriate as ZZRingElem is not <: Integer
 # this method is useful in particular to enable rand(ZZ(n):ZZ(m))
 function Base.length(r::StepRange{ZZRingElem})
-    n = div((r.stop - r.start) + r.step, r.step)
+    n = div((last(r) - first(r)) + step(r), step(r))
     isempty(r) ? zero(BigInt) : BigInt(n)
 end
 

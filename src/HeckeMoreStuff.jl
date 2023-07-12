@@ -255,7 +255,7 @@ function is_upper_triangular(A::Generic.Mat)
     return true
 end
 
-function sub(M::Generic.Mat, rows::UnitRange{Int}, cols::UnitRange{Int})
+function sub(M::Generic.Mat, rows::AbstractUnitRange{Int}, cols::AbstractUnitRange{Int})
     @assert step(rows) == 1 && step(cols) == 1
     z = zero_matrix(base_ring(M), length(rows), length(cols))
     for i in rows

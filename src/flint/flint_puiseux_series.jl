@@ -449,21 +449,21 @@ const FlintPuiseuxSeriesRingOrField = Union{FlintPuiseuxSeriesRing,FlintPuiseuxS
 
 RandomExtensions.maketype(S::FlintPuiseuxSeriesRingOrField, _, _) = elem_type(S)
 
-RandomExtensions.make(S::FlintPuiseuxSeriesRingOrField, val_range::UnitRange{Int},
-                      scale_range::UnitRange{Int}, vs...) =
+RandomExtensions.make(S::FlintPuiseuxSeriesRingOrField, val_range::AbstractUnitRange{Int},
+                      scale_range::AbstractUnitRange{Int}, vs...) =
    make(S, scale_range, make(laurent_ring(S), val_range, vs...))
 
 function rand(rng::AbstractRNG,
               sp::SamplerTrivial{<:Make3{<:RingElement,
                                          <:FlintPuiseuxSeriesRingOrField,
-                                         UnitRange{Int}}})
+                                         <:AbstractUnitRange{Int}}})
    S, scale_range, v = sp[][1:end]
    (first(scale_range) <= 0 || last(scale_range) <= 0) && error("Scale must be positive")
    return S(rand(rng, v), rand(rng, scale_range))
 end
 
 function rand(rng::AbstractRNG, S::FlintPuiseuxSeriesRingOrField,
-              val_range::UnitRange{Int}, scale_range::UnitRange{Int}, v...)
+              val_range::AbstractUnitRange{Int}, scale_range::AbstractUnitRange{Int}, v...)
    rand(rng, make(S, val_range, scale_range, v...))
 end
 

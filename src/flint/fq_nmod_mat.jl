@@ -532,8 +532,8 @@ function Base.view(x::fqPolyRepMatrix, r1::Int, c1::Int, r2::Int, c2::Int)
    return z
 end
 
-function Base.view(x::fqPolyRepMatrix, r::UnitRange{Int}, c::UnitRange{Int})
-   return Base.view(x, r.start, c.start, r.stop, c.stop)
+function Base.view(x::fqPolyRepMatrix, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int})
+   return Base.view(x, first(r), first(c), last(r), last(c))
 end
 
 function _fq_nmod_mat_window_clear_fn(a::fqPolyRepMatrix)
@@ -545,11 +545,11 @@ function sub(x::fqPolyRepMatrix, r1::Int, c1::Int, r2::Int, c2::Int)
   return deepcopy(Base.view(x, r1, c1, r2, c2))
 end
 
-function sub(x::fqPolyRepMatrix, r::UnitRange{Int}, c::UnitRange{Int})
+function sub(x::fqPolyRepMatrix, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int})
   return deepcopy(Base.view(x, r, c))
 end
 
-getindex(x::fqPolyRepMatrix, r::UnitRange{Int}, c::UnitRange{Int}) = sub(x, r, c)
+getindex(x::fqPolyRepMatrix, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int}) = sub(x, r, c)
 
 ################################################################################
 #

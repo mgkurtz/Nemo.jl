@@ -586,8 +586,8 @@ function Base.view(x::ZZModMatrix, r1::Int, c1::Int, r2::Int, c2::Int)
   return z
 end
 
-function Base.view(x::T, r::UnitRange{Int}, c::UnitRange{Int}) where T <: Zmod_fmpz_mat
-  return Base.view(x, r.start, c.start, r.stop, c.stop)
+function Base.view(x::T, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int}) where T <: Zmod_fmpz_mat
+  return Base.view(x, first(r), first(c), last(r), last(c))
 end
 
 function _fmpz_mod_mat_window_clear_fn(a::ZZModMatrix)
@@ -598,11 +598,11 @@ function sub(x::T, r1::Int, c1::Int, r2::Int, c2::Int) where T <: Zmod_fmpz_mat
   return deepcopy(Base.view(x, r1, c1, r2, c2))
 end
 
-function sub(x::T, r::UnitRange{Int}, c::UnitRange{Int}) where T <: Zmod_fmpz_mat
+function sub(x::T, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int}) where T <: Zmod_fmpz_mat
   return deepcopy(Base.view(x, r, c))
 end
 
-function getindex(x::T, r::UnitRange{Int}, c::UnitRange{Int}) where T <: Zmod_fmpz_mat
+function getindex(x::T, r::AbstractUnitRange{Int}, c::AbstractUnitRange{Int}) where T <: Zmod_fmpz_mat
    sub(x, r, c)
 end
 
